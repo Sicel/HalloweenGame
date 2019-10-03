@@ -5,13 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [HideInInspector]
-    Rigidbody2D rigidB;
+    Rigidbody2D rigidB; // Needed to allow movement
 
     [SerializeField]
     float speed = 20;
 
     [SerializeField]
-    float jumpForce = 100;
+    float jumpForce = 100; 
 
     [SerializeField]
     bool onGround = false;
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
         rigidB.velocity = new Vector2(horizontal * speed, rigidB.velocity.y);
 
+        // Allows jumping only if player is on ground
         if (onGround)
         {
             if (Input.GetKeyDown(KeyCode.W))
@@ -48,15 +49,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    // When player comes into contact with another object
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Ground")
         {
             onGround = true;
         }
     }
 
+    // When player leaves contact with another object
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
