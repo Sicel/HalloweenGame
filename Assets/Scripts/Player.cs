@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     bool onGround = false;
 
+    SpriteRenderer spriteR;
+    int numCostumes = Enum.GetNames(typeof(Costumes)).Length;
+
+    [SerializeField]
+    List<Color32> costumeColors =  new List<Color32>();
+
+    Costumes currentCostume = Costumes.None;
+
     enum Costumes
     {
         None,
@@ -27,12 +36,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidB = GetComponent<Rigidbody2D>();
+
+        spriteR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        ChangeCostume();
     }
 
     void Move()
@@ -47,6 +59,39 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
                 rigidB.AddForce(new Vector2(0, jumpForce));
         }
+    }
+
+    void ChangeCostume()
+    {
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            currentCostume--;
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            currentCostume++;
+        }
+
+        if (currentCostume < 0)
+        {
+            currentCostume = (Costumes)numCostumes - 1;
+        }
+        else if ((int)currentCostume >= numCostumes)
+        {
+            currentCostume = 0;
+        }
+
+        switch (currentCostume)
+        {
+            case Costumes.None:
+                break;
+            case Costumes.Cat:
+                break;
+            case Costumes.Witch:
+                break;
+        }
+
+        spriteR.color = costumeColors[(int)currentCostume];
     }
 
     // When player comes into contact with another object
@@ -65,5 +110,10 @@ public class Player : MonoBehaviour
         {
             onGround = false;
         }
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.Box("Current Costume: " + currentCostume);
     }
 }
