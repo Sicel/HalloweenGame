@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [HideInInspector]
-    Rigidbody2D rigidbody;
+    Rigidbody2D rigidB;
 
     [SerializeField]
     float speed = 20;
@@ -13,12 +13,20 @@ public class Player : MonoBehaviour
     [SerializeField]
     float jumpForce = 100;
 
+    [SerializeField]
     bool onGround = false;
+
+    enum Costumes
+    {
+        None,
+        Cat,
+        Witch
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -31,9 +39,29 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
 
-        rigidbody.velocity = new Vector2(horizontal * speed, rigidbody.velocity.y);
+        rigidB.velocity = new Vector2(horizontal * speed, rigidB.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.W))
-            rigidbody.AddForce(new Vector2(0, jumpForce));
+        if (onGround)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+                rigidB.AddForce(new Vector2(0, jumpForce));
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
     }
 }
