@@ -1,53 +1,53 @@
-# FunWithGit _(Game Name)_
+# _Magicrush_
 
-### _(Team Name)_
+### _QTπ Gang_
 
 | Version Control Master | Scrum Master    |
 | ---------------------- | --------------- |
-| Name                   | Name            |
-| RIT username           | RIT username    |
-| Discord name           | Discord name    |
-| GitHub username        | GitHub username |
+| Cristian Cordoba       | Anthony Pichardo|
+| cxc9597                | akp4657         |
+| Cristian(csc9597)      | Anthony(akp4657)|
+| sicel                  | akp4657         |
 
 #### Keywords
 
--   Adjectives
--   Max 10
--   Capture key aspects of the idea
+-   2D Action Platformer
+-   Sugary/Sweet
+-   Magical
+-   Kawaii Kowai (cute scary)
+-   OwO
 
 #### Platforms(s)
 
--   List each
+-   PC
 
 #### Target Player Exerience
 
-What kind of experience do you want the player to have with your game? Are they going to have to outsmart their enemies, explore a new world. Do not list the game’s mechanics or features and do not use the word “UNIQUE”.
+Players should have fun conquering their enemies as well as collecting more outfits for the main character. They should feel an urgency to defeat the reptoids before they take over their character's world.
 
 #### Core Diagram
 
 1.  Core Mechaninc
 
-    -   2d action platformer - main character will change outfits granting her greater mobility, strength, or other skills
-      -sugar rush - main character's body uses sugar to create extra energy
+    -   The main character will have the ability to change outfits that will grant her different abilities such as greater mobility, strength, or other skills.
+    
 
 2.  Secondary Mechancis
 
-    -   Add additional costumes for more specialized powers
-    -   Succubus
-    -   Vampire
+    -   "Sugar Rush" power-up where the main character's body uses sugar to create extra energy and, therefore, becomes stronger and faster.
 
 
 3.  Progression
 
-    -   Player unlocks costume abilities while using them to overcome puzzles and enemies
+    -   The player unlocks more costumes and abilities as they defeat more enemies and bosses.
 
 4.  Narrative
 
-    -   It is halloween, and the barrier between worlds is thinning. This year, the Reptoids plan to invade from the netherworld and only one person can stop them.
+    -   It's the night of October 31st: Halloween. As with each year, the barrier between worlds is thinning. This time, the Reptoids from the netherworld plan to invade our world, and there is only one magical girl, Hai Nyoon, who can stop them.
 
 #### Minimal Viable Interaction
 
-Player should move, jump and attack. There should be pits/obstacles to maneuver around, and enemies to fight.
+The player should move, jump and attack. There should be pits/obstacles to maneuver around, and enemies to fight.
 
 #### References
 
