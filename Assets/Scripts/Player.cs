@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [HideInInspector]
-    Rigidbody2D rigidB; // Needed to allow movement
+    protected Rigidbody2D rigidB; // Needed to allow movement
 
     [SerializeField]
     float speed = 20;
@@ -51,7 +51,14 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
 
-        rigidB.velocity = new Vector2(horizontal * speed, rigidB.velocity.y);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rigidB.velocity = new Vector2(horizontal * speed * 1.5f, rigidB.velocity.y);
+        }
+        else
+        {
+            rigidB.velocity = new Vector2(horizontal * speed, rigidB.velocity.y);
+        }
 
         // Allows jumping only if player is on ground
         if (onGround)
