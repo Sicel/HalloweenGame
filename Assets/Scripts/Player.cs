@@ -9,13 +9,13 @@ public class Player : MonoBehaviour
     protected Rigidbody2D rigidB; // Needed to allow movement
 
     [SerializeField]
-    float speed = 20;
+    protected float speed = 20;
 
     [SerializeField]
-    float jumpForce = 100; 
+    protected float jumpForce = 100; 
 
     [SerializeField]
-    bool onGround = false;
+    protected bool onGround = false;
 
     SpriteRenderer spriteR;
     int numCostumes = Enum.GetNames(typeof(Costumes)).Length;
@@ -23,7 +23,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     List<Color32> costumeColors =  new List<Color32>();
 
+    Dictionary<Costumes, Costume> costumePair = new Dictionary<Costumes, Costume>()
+    {
+        { Costumes.Cat , new CatCostume() },
+        { Costumes.Witch, new WitchCostume() }
+    };
+
     Costumes currentCostume = Costumes.None;
+
 
     enum Costumes
     {
@@ -47,7 +54,12 @@ public class Player : MonoBehaviour
         ChangeCostume();
     }
 
-    void Move()
+    protected virtual void Attack()
+    {
+
+    }
+
+    protected virtual void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
 
@@ -90,11 +102,12 @@ public class Player : MonoBehaviour
 
         switch (currentCostume)
         {
-            case Costumes.None:
-                break;
             case Costumes.Cat:
                 break;
             case Costumes.Witch:
+                break;
+            default:
+                Move();
                 break;
         }
 

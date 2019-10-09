@@ -4,7 +4,16 @@ using UnityEngine;
 
 public abstract class Costume : Player
 {
-    public abstract void Attack();
+    [SerializeField]
+    int cSpeed;
 
-    public abstract void Movement();
+    [SerializeField]
+    [Range(1, 10)]
+    int cStrength;
+
+    [SerializeField]
+    int cJumpForce;
+
+    [SerializeField]
+    bool flight;
 }
