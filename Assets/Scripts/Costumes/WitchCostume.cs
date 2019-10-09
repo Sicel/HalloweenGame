@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WitchCostume : Costume
 {
-    public override void Attack()
+    protected override void Attack()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void Movement()
+    protected override void Move()
     {
         throw new System.NotImplementedException();
     }
