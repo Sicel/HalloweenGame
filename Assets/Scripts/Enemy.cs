@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Agent
 {
     Vector2 Upper;
     Vector2 Lower;
-    Rigidbody2D rigidB;
-    bool direction;
+    public float accelerationValue;
+    bool binDirection;
     Vector2 currentPos;
     bool onGround;
     // Start is called before the first frame update
@@ -17,10 +17,13 @@ public class Enemy : MonoBehaviour
         Upper.x += 4;
         Lower = transform.position;
         Lower.x -= 4;
-        rigidB = GetComponent<Rigidbody2D>();
-        direction = false;
+        //rigidB = GetComponent<Rigidbody2D>();
+        binDirection = false;
         currentPos = transform.position;
-        onGround = true;
+        onGround = false;
+        agentPosition = transform.position;
+        //maxSpeed = 10f;
+       //mass = 5f;
     }
 
     // Update is called once per frame
@@ -29,15 +32,64 @@ public class Enemy : MonoBehaviour
         currentPos = transform.position;
         if(currentPos.x >= Upper.x)
         {
-            direction = false;
+            binDirection = false;
         }
         if (currentPos.x <= Lower.x)
         {
-            direction = true;
+            binDirection = true;
+        }
+
+        Vector2 netForce = CalcSteeringForces();
+        Debug.Log(onGround);
+        if (onGround == false)
+        {
+            netForce.y += -9.81f;
+        }
+        else
+        {
+            velocity.y = 0;
         }
 
 
-        Move();   
+        ApplyForce(netForce);
+
+
+       
+
+
+        velocity += acceleration * Time.deltaTime;
+        agentPosition += velocity * Time.deltaTime;
+        acceleration = Vector3.zero;
+        transform.position = agentPosition;
+        //transform.right = velocity;
+
+        //Move();   
+    }
+
+    public override Vector3 CalcSteeringForces()
+    {
+        
+
+        Vector3 netForce = Vector3.zero;
+
+        if(binDirection == true /*&& velocity.x < 2*/)
+        {
+            netForce += Vector3.right * accelerationValue;
+            
+        }
+        else /*if(velocity.x > -2)*/
+        {
+            netForce += Vector3.right * accelerationValue * -1;
+            
+        }
+
+        
+
+        netForce = netForce.normalized;
+        netForce = netForce * maxSpeed;
+        //Debug.Log(netForce);
+        return netForce;
+
     }
 
     void Move()
@@ -45,7 +97,7 @@ public class Enemy : MonoBehaviour
         //float horizontal = Input.GetAxis("Horizontal");
         int speed = 0;
 
-        if(direction == true)
+        if(binDirection == true)
         {
             speed = 4;
         }
@@ -54,12 +106,12 @@ public class Enemy : MonoBehaviour
             speed = -4;
         }
 
-        rigidB.velocity = new Vector2(speed, rigidB.velocity.y);
+        //rigidB.velocity = new Vector2(speed, rigidB.velocity.y);
 
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
@@ -67,12 +119,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // When player leaves contact with another object
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
             onGround = false;
         }
     }
+
+    
+
+    
 }
