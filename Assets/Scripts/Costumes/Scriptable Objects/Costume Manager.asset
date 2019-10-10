@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396dd72102c6a694f9ba2255a80c7f9e, type: 3}
+  m_Name: Costume Manager
+  m_EditorClassIdentifier: 
+  costumeScripts:
+  - {fileID: 11400000, guid: dc59f3d410688f749bdaca1849a73d6c, type: 2}
+  - {fileID: 11400000, guid: 5c43254b738ffcb41914da11a605799e, type: 2}
+  - {fileID: 11400000, guid: df0e5b0930d42ea498a10eb6daf95730, type: 2}

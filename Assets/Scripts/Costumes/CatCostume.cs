@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatCostume : Costume
-{
-    protected override void Attack()
+/// <summary>
+/// Costume Type: Cat
+/// </summary>
+[CreateAssetMenu(menuName = "Costume Stats/Cat Stats")]
+public class CatCostume : BaseCostume
+{ 
+    public override void Move()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void Move()
-    {
-        throw new System.NotImplementedException();
+        base.Move();
     }
 }

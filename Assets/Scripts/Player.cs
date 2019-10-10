@@ -5,81 +5,52 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector]
-    protected Rigidbody2D rigidB; // Needed to allow movement
+    public static Rigidbody2D rigidB; // Needed to allow movement
+
+    public static bool onGround = false; // Is the player touching the ground?
+
+    public BaseCostume currentCostumeScript = null; // Script of current costume
 
     [SerializeField]
-    protected float speed = 20;
+    int health = 3; // Health points
+
+    SpriteRenderer spriteR; // Player's Sprite rendere (temp)
+    int numCostumes = CostumeManager.numCostumes; // Num of total costumes used for iteration in ChangeCostume()
 
     [SerializeField]
-    protected float jumpForce = 100; 
+    List<Color32> costumeColors = new List<Color32>(); // Colors for the temp player
 
     [SerializeField]
-    protected bool onGround = false;
-
-    SpriteRenderer spriteR;
-    int numCostumes = Enum.GetNames(typeof(Costumes)).Length;
+    CostumeManager.Costume currentCostume = CostumeManager.Costume.None; // Current costume as enum
 
     [SerializeField]
-    List<Color32> costumeColors =  new List<Color32>();
+    CostumeManager manager; // Used to get a list of all costumes
 
-    Dictionary<Costumes, Costume> costumePair = new Dictionary<Costumes, Costume>()
+    public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
+
+    private void Awake()
     {
-        { Costumes.Cat , new CatCostume() },
-        { Costumes.Witch, new WitchCostume() }
-    };
-
-    Costumes currentCostume = Costumes.None;
-
-
-    enum Costumes
-    {
-        None,
-        Cat,
-        Witch
+        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets the initial costume
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidB = GetComponent<Rigidbody2D>();
+        rigidB = GetComponent<Rigidbody2D>(); // Gets rigid body component
 
-        spriteR = GetComponent<SpriteRenderer>();
+        spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
         ChangeCostume();
+        currentCostumeScript.Move(); // Moves using currently equipped costume's movement method
     }
 
-    protected virtual void Attack()
-    {
-
-    }
-
-    protected virtual void Move()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            rigidB.velocity = new Vector2(horizontal * speed * 1.5f, rigidB.velocity.y);
-        }
-        else
-        {
-            rigidB.velocity = new Vector2(horizontal * speed, rigidB.velocity.y);
-        }
-
-        // Allows jumping only if player is on ground
-        if (onGround)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                rigidB.AddForce(new Vector2(0, jumpForce));
-        }
-    }
-
+    /// <summary>
+    /// Changes costume using ',' and '.' keys
+    /// </summary>
     void ChangeCostume()
     {
         if (Input.GetKeyDown(KeyCode.Comma))
@@ -91,27 +62,19 @@ public class Player : MonoBehaviour
             currentCostume++;
         }
 
+        // If at the begining or end of the list of costumes
         if (currentCostume < 0)
         {
-            currentCostume = (Costumes)numCostumes - 1;
+            currentCostume = (CostumeManager.Costume)numCostumes - 1;
         }
         else if ((int)currentCostume >= numCostumes)
         {
             currentCostume = 0;
         }
 
-        switch (currentCostume)
-        {
-            case Costumes.Cat:
-                break;
-            case Costumes.Witch:
-                break;
-            default:
-                Move();
-                break;
-        }
+        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets costume
 
-        spriteR.color = costumeColors[(int)currentCostume];
+        spriteR.color = costumeColors[(int)currentCostume]; // Changes color of temp player
     }
 
     // When player comes into contact with another object
@@ -132,6 +95,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Displays current costume on screen
     private void OnGUI()
     {
         GUILayout.Box("Current Costume: " + currentCostume);
