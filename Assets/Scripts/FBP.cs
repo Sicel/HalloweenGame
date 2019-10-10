@@ -38,13 +38,36 @@ public class FBP : Agent
         {
             netForce += Vector3.right * accelerationValue * horizontal;
         }
-
-
-
-
-        if (Mathf.Abs(netForce.x) < maxSpeed)
+        else
         {
-            netForce.x = maxSpeed;
+            if(Mathf.Abs(velocity.x) < 0.1f)
+            {
+                velocity.x = 0;
+            }
+            else if (velocity.x > 0)
+            {
+                netForce -= applyFriction(1);
+            }
+            else if(velocity.x < 0)
+            {
+                netForce += applyFriction(1);
+            }
+        }
+
+
+
+        
+        if (Mathf.Abs(netForce.x) > maxSpeed)
+        {
+            
+            if(netForce.x > 0)
+            {
+                netForce.x = maxSpeed;
+            }
+            else
+            {
+                netForce.x = -maxSpeed;
+            }
         }
         return netForce;
         
