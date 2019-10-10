@@ -16,16 +16,16 @@ public class FBP : Agent
     // Update is called once per frame
     void Update()
     {
-        Vector2 netForce = CalcSteeringForces();
-        ApplyForce(netForce);
+        //Vector2 netForce = CalcSteeringForces();
+        //ApplyForce(netForce);
 
-        velocity += acceleration * Time.deltaTime;
-        agentPosition += velocity * Time.deltaTime;
-        acceleration = Vector3.zero; //reset acceleration for next loop
-        transform.position = agentPosition;
+        //velocity += acceleration * Time.deltaTime;
+       // agentPosition += velocity * Time.deltaTime;
+       // acceleration = Vector3.zero; //reset acceleration for next loop
+        //transform.position = agentPosition;
     }
 
-    public override Vector3 CalcSteeringForces()
+    /*public override Vector3 CalcSteeringForces()
     {
         //throw new System.NotImplementedException();
         Vector3 netForce = Vector3.zero;
@@ -72,4 +72,5 @@ public class FBP : Agent
         return netForce;
         
     }
+    */
 }

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Agent
 {
     public static Rigidbody2D rigidB; // Needed to allow movement
+
+    public static Transform _transform; // Needed to allow movement
 
     public static bool onGround = false; // Is the player touching the ground?
 
@@ -38,12 +40,18 @@ public class Player : MonoBehaviour
     {
         rigidB = GetComponent<Rigidbody2D>(); // Gets rigid body component
 
+        _transform = transform;
+
         spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
     }
 
     // Update is called once per frame
     void Update()
     {
+        //access current costume - get & set movement values
+
+
+
         ChangeCostume();
         currentCostumeScript.Move(); // Moves using currently equipped costume's movement method
     }
@@ -75,24 +83,6 @@ public class Player : MonoBehaviour
         currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets costume
 
         spriteR.color = costumeColors[(int)currentCostume]; // Changes color of temp player
-    }
-
-    // When player comes into contact with another object
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = true;
-        }
-    }
-
-    // When player leaves contact with another object
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = false;
-        }
     }
 
     // Displays current costume on screen

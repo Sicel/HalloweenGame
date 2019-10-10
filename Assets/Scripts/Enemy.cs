@@ -10,25 +10,52 @@ public class Enemy : Agent
     bool binDirection; // determines which direction the enemy should move
     Vector2 currentPos;
     bool onGround;
-    // Start is called before the first frame update
-    void Start()
+    Rigidbody2D rigidB;
+    public float moveSpeed = 20;
+    public Vector2 startPos;
+
+    private void Start()
     {
-        Upper = transform.position;
-        Upper.x += 4; // sets upper bound for enemy movement
-        Lower = transform.position;
-        Lower.x -= 4; // sets lower bound for enemy movement
-        binDirection = false;
-        currentPos = transform.position;
-        onGround = false;
-        agentPosition = transform.position;
-        //gravity = 9.81f;
-        
+        rigidB = GetComponent<Rigidbody2D>();
+        startPos = transform.position;
     }
 
+    private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        //move speed was switching each frame, causing the jitter
+        //if (rigidB.position.x > startPos.x + 4 || rigidB.position.x < startPos.x - 4)
+        //{
+        //    moveSpeed = -moveSpeed;
+        //}
+        if(rigidB.position.x > startPos.x + 4)
+        {
+            moveSpeed = -20;
+        }
+        if(rigidB.position.x < startPos.x - 4)
+        {
+            moveSpeed = 20;
+        }
+        
+        Debug.Log("rigidb " + rigidB.position.x);
+        Debug.Log("transform " + transform.position.x);
+
+
+
+
+
+        rigidB.velocity = new Vector2(moveSpeed, rigidB.velocity.y);
+    }
+
+    /*
     // Update is called once per frame
     void Update()
     {
-        currentPos = transform.position;
+       // currentPos = transform.position;
         if(currentPos.x >= Upper.x)
         {
             binDirection = false;
@@ -60,7 +87,7 @@ public class Enemy : Agent
         velocity += acceleration * Time.deltaTime; 
         agentPosition += velocity * Time.deltaTime;
         acceleration = Vector3.zero; //reset acceleration for next loop
-        transform.position = agentPosition;
+       // transform.position = agentPosition;
         //transform.right = velocity;
 
         //Move();   
@@ -106,24 +133,6 @@ public class Enemy : Agent
         return netForce;
 
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = false;
-        }
-    }
-
-    
-
+    */
     
 }

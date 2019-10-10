@@ -13,6 +13,7 @@ public abstract class Agent : MonoBehaviour
     public float accelerationValue; //magnitude of acceleration, independent of maxSpeed
     public float mass; //mass of the agent, defaulted to 1
     public float gravity;
+    bool onGround = false;
 
     // Start is called before the first frame update
     protected void Start()
@@ -30,7 +31,7 @@ public abstract class Agent : MonoBehaviour
     /// <summary>
     /// Implemented by each agent, calculates net velocity and direction
     /// </summary>
-    public abstract Vector3 CalcSteeringForces();
+    //public abstract Vector3 CalcSteeringForces();
 
     /// <summary>
     /// Calculates final acceleration on an agent
@@ -53,5 +54,23 @@ public abstract class Agent : MonoBehaviour
         frictionForce.x = (gravity*mass) * mu;
 
         return frictionForce;
+    }
+
+    // When player comes into contact with another object
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+        }
+    }
+
+    // When player leaves contact with another object
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
     }
 }

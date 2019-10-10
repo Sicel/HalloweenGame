@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39430ee55e04984ab639dd87f9ebc3c, type: 3}
   m_Name: Witch Costume
   m_EditorClassIdentifier: 
+  agentPosition: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  maxSpeed: 10
+  accelerationValue: 10
+  mass: 5
+  gravity: 9.81
   strength: 5
   baseSpeed: 10
   sprintMultiplier: 1.5
   jumpForce: 100
-  flight: 0
+  isAbleToFly: 0
   projectile: {fileID: 0}
   flyMode: 0
