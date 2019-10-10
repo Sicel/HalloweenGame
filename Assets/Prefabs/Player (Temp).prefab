@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4563779121260416111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +141,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6004dac1ffd55614da7b3702f3d40bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 185
-  onGround: 0
+  currentCostumeScript: {fileID: 0}
+  health: 3
+  costumeColors:
+  - serializedVersion: 2
+    rgba: 4294901779
+  - serializedVersion: 2
+    rgba: 4279835111
+  - serializedVersion: 2
+    rgba: 4290455247
+  currentCostume: 2
+  manager: {fileID: 11400000, guid: afe90ab85e8a45e4b8f4406f97f43970, type: 2}
