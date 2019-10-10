@@ -6,24 +6,23 @@ public class Enemy : Agent
 {
     Vector2 Upper;
     Vector2 Lower;
-    public float accelerationValue;
-    bool binDirection;
+    //public float accelerationValue; //how fast the enemy should accelerate
+    bool binDirection; // determines which direction the enemy should move
     Vector2 currentPos;
     bool onGround;
     // Start is called before the first frame update
     void Start()
     {
         Upper = transform.position;
-        Upper.x += 4;
+        Upper.x += 4; // sets upper bound for enemy movement
         Lower = transform.position;
-        Lower.x -= 4;
-        //rigidB = GetComponent<Rigidbody2D>();
+        Lower.x -= 4; // sets lower bound for enemy movement
         binDirection = false;
         currentPos = transform.position;
         onGround = false;
         agentPosition = transform.position;
-        //maxSpeed = 10f;
-       //mass = 5f;
+        //gravity = 9.81f;
+        
     }
 
     // Update is called once per frame
@@ -40,10 +39,11 @@ public class Enemy : Agent
         }
 
         Vector2 netForce = CalcSteeringForces();
-        Debug.Log(onGround);
+        //Debug.Log(onGround);
+        //gravity application - move to calc steering forces
         if (onGround == false)
         {
-            netForce.y += -9.81f;
+            netForce.y += -gravity;
         }
         else
         {
@@ -57,9 +57,9 @@ public class Enemy : Agent
        
 
 
-        velocity += acceleration * Time.deltaTime;
+        velocity += acceleration * Time.deltaTime; 
         agentPosition += velocity * Time.deltaTime;
-        acceleration = Vector3.zero;
+        acceleration = Vector3.zero; //reset acceleration for next loop
         transform.position = agentPosition;
         //transform.right = velocity;
 
@@ -71,43 +71,39 @@ public class Enemy : Agent
         
 
         Vector3 netForce = Vector3.zero;
-
-        if(binDirection == true /*&& velocity.x < 2*/)
+        //current movement has enemy accelerate to a certian velocity, then slide to a stop
+        if (binDirection == true && velocity.x < 2) //move to the right
         {
             netForce += Vector3.right * accelerationValue;
-            
+
         }
-        else /*if(velocity.x > -2)*/
+        else if (velocity.x > -2) //move to the left
         {
             netForce += Vector3.right * accelerationValue * -1;
-            
+
+        }
+        else //apply friction
+        {
+            if(velocity.x > Mathf.Abs(0.1f))
+            {
+                applyFriction(1);
+            }
+
+
         }
 
-        
+       
 
-        netForce = netForce.normalized;
-        netForce = netForce * maxSpeed;
-        //Debug.Log(netForce);
+
+
+        if(Mathf.Abs(netForce.x) > maxSpeed)
+        {
+            netForce.x = maxSpeed;
+        }
+
+        //netForce = netForce.normalized;
+        //netForce = netForce * maxSpeed;
         return netForce;
-
-    }
-
-    void Move()
-    {
-        //float horizontal = Input.GetAxis("Horizontal");
-        int speed = 0;
-
-        if(binDirection == true)
-        {
-            speed = 4;
-        }
-        else
-        {
-            speed = -4;
-        }
-
-        //rigidB.velocity = new Vector2(speed, rigidB.velocity.y);
-
 
     }
 
