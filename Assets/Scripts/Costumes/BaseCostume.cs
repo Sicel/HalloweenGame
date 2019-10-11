@@ -5,24 +5,28 @@ using UnityEngine;
 /// <summary>
 /// Basis for all other costumes
 /// Cannot be called
+/// **Made these values public for the Magic Rush movement,
+/// **we can discuss how we want to implement it at a meeting.
+/// **However, I feel this is best for our current setup
+/// **-Anthony
 /// </summary>
 public abstract class BaseCostume : ScriptableObject
 {
     [SerializeField]
-    protected float strength = 5; // Costume strength
+    public float strength = 5; // Costume strength
 
     [SerializeField]
-    protected float baseSpeed = 20; // Speed
+    public float baseSpeed = 20; // Speed
 
     [SerializeField]
     [Range(1.0f, 2.0f)]
-    protected float sprintMultiplier = 1.5f; // Sprint speed (must be a value between 1 and 2)
+    public float sprintMultiplier = 1.5f; // Sprint speed (must be a value between 1 and 2)
 
     [SerializeField]
-    protected float jumpForce = 100; // Force of jump
+    public float jumpForce = 100; // Force of jump
 
     [SerializeField]
-    protected bool isAbleToFly = false;
+    public bool isAbleToFly = false;
 
     //public float maxSpeed { get { return baseSpeed; } } 
     public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }

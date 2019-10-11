@@ -11,6 +11,11 @@ public class Player : Agent
 
     public static bool onGround = false; // Is the player touching the ground?
 
+    // Public magicRush bool and timer
+    public bool magicRush = false;
+
+    public float timer = 2f;
+
     public BaseCostume currentCostumeScript = null; // Script of current costume
 
     [SerializeField]
@@ -54,6 +59,12 @@ public class Player : Agent
 
         ChangeCostume();
         currentCostumeScript.Move(); // Moves using currently equipped costume's movement method
+
+        // Player rushes
+        if (magicRush)
+        {
+            MagicRush(currentCostumeScript);
+        }
     }
 
     /// <summary>
@@ -85,9 +96,58 @@ public class Player : Agent
         spriteR.color = costumeColors[(int)currentCostume]; // Changes color of temp player
     }
 
+    // When player comes into contact with another object
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+        }
+
+        // If the objet collides with the candy object
+        if(collision.gameObject.tag == "Candy")
+        {
+            // Set our MR bool
+            magicRush = true;
+        }
+    }
+
+    // When player leaves contact with another object
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
+    }
+
     // Displays current costume on screen
     private void OnGUI()
     {
         GUILayout.Box("Current Costume: " + currentCostume);
+    }
+
+    // Method for Magic Rush
+    private void MagicRush(BaseCostume currentCostumeScript)
+    {
+        // Start the five second timer
+        timer -= Time.deltaTime;
+
+        // Mess with the values to give a rush
+        //currentCostumeScript.strength *= 2;
+        //currentCostumeScript.sprintMultiplier = 2;
+        //currentCostumeScript.jumpForce += 50;
+        Debug.Log("In MR method");
+
+        // When the timer reaches zero, reset values and timer
+        if(timer <=0)
+        {
+            magicRush = false;
+            ///currentCostumeScript.strength /= 2;
+            //currentCostumeScript.sprintMultiplier = 1.5f;
+            //currentCostumeScript.jumpForce -= 50;
+            timer = 2f;
+            Debug.Log("Did MR method");
+        }
     }
 }
