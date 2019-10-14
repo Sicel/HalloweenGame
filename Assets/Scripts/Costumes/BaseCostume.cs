@@ -28,6 +28,8 @@ public abstract class BaseCostume : ScriptableObject
     [SerializeField]
     public bool isAbleToFly = false;
 
+    public static Player player;
+
     //public float maxSpeed { get { return baseSpeed; } } 
     public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }
 
@@ -136,7 +138,7 @@ public abstract class BaseCostume : ScriptableObject
         HorizontalMovement();
 
         // Allows jumping only if player is on ground
-        if (Player.onGround)
+        if (player.onGround)
             Jump();
     }
 }

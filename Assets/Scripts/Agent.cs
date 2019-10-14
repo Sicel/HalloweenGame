@@ -13,7 +13,7 @@ public abstract class Agent : MonoBehaviour
     public float accelerationValue; //magnitude of acceleration, independent of maxSpeed
     public float mass; //mass of the agent, defaulted to 1
     public float gravity;
-    bool onGround = false;
+    public bool onGround = false;
 
     // Start is called before the first frame update
     protected void Start()
@@ -57,7 +57,7 @@ public abstract class Agent : MonoBehaviour
     }
 
     // When player comes into contact with another object
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
@@ -66,7 +66,7 @@ public abstract class Agent : MonoBehaviour
     }
 
     // When player leaves contact with another object
-    private void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {

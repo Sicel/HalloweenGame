@@ -22,14 +22,14 @@ public class WitchCostume : BaseCostume
         {
             Fly();
 
-            if (Player.onGround)
+            if (player.onGround)
                 flyMode = !flyMode;
         }
         else
         {
             Jump();
 
-            if (!Player.onGround && Input.GetKeyDown(KeyCode.W))
+            if (!player.onGround && Input.GetKeyDown(KeyCode.W))
                 flyMode = !flyMode;
         }
     }
