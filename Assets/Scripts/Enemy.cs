@@ -34,11 +34,11 @@ public class Enemy : Agent
         //}
         if(rigidB.position.x > startPos.x + 4)
         {
-            moveSpeed = -20;
+            moveSpeed = -5;
         }
         if(rigidB.position.x < startPos.x - 4)
         {
-            moveSpeed = 20;
+            moveSpeed = 5;
         }
         
         //Debug.Log("rigidb " + rigidB.position.x);
