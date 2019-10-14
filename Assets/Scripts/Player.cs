@@ -63,7 +63,7 @@ public class Player : Agent
         // Player rushes
         if (magicRush)
         {
-            MagicRush(currentCostumeScript);
+            MagicRush();
         }
     }
 
@@ -128,7 +128,7 @@ public class Player : Agent
     }
 
     // Method for Magic Rush
-    private void MagicRush(BaseCostume currentCostumeScript)
+    private void MagicRush()
     {
         // Start the five second timer
         timer -= Time.deltaTime;

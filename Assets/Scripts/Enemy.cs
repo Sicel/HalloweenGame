@@ -41,8 +41,8 @@ public class Enemy : Agent
             moveSpeed = 20;
         }
         
-        Debug.Log("rigidb " + rigidB.position.x);
-        Debug.Log("transform " + transform.position.x);
+        //Debug.Log("rigidb " + rigidB.position.x);
+        //Debug.Log("transform " + transform.position.x);
 
 
 
