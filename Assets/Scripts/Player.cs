@@ -11,6 +11,10 @@ public class Player : Agent
 
     public static bool onGround = false; // Is the player touching the ground?
 
+    public bool touchingEnemy = false; //is the player in contact with an enemy
+
+    public GameObject collidingEnemy; //enemy player is colliding with
+
     // Public magicRush bool and timer
     public bool magicRush = false;
 
@@ -65,6 +69,12 @@ public class Player : Agent
         {
             MagicRush();
         }
+
+        if(touchingEnemy == true)
+        {
+            Knockback();
+            //put damage here
+        }
     }
 
     /// <summary>
@@ -110,6 +120,14 @@ public class Player : Agent
             // Set our MR bool
             magicRush = true;
         }
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+
+            touchingEnemy = true;
+            collidingEnemy = collision.gameObject;
+            
+        }
     }
 
     // When player leaves contact with another object
@@ -118,6 +136,13 @@ public class Player : Agent
         if (collision.gameObject.tag == "Ground")
         {
             onGround = false;
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            touchingEnemy = false;
+            //collidingEnemy = collision.gameObject;
+
         }
     }
 
@@ -149,5 +174,16 @@ public class Player : Agent
             timer = 2f;
             Debug.Log("Did MR method");
         }
+    }
+
+    private void Knockback()
+    {
+        Vector3 pushVector = transform.position - collidingEnemy.transform.position;
+
+        pushVector *= 100;
+
+        rigidB.AddForce(pushVector);
+
+        Debug.Log("pushing");
     }
 }
