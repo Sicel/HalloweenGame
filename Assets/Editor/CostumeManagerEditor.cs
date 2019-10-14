@@ -22,7 +22,7 @@ public class CostumeManagerEditor : Editor
         GUILayout.BeginVertical();
         for (int i = 0; i < costumeScripts.arraySize; i++)
         {
-            CostumeManager.Costume current = (CostumeManager.Costume)i;
+            Costume current = (Costume)i;
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(current.ToString());
             EditorGUILayout.PropertyField(costumeScripts.GetArrayElementAtIndex(i), GUIContent.none);
