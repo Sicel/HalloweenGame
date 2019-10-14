@@ -53,4 +53,6 @@ The player should move, jump and attack. There should be pits/obstacles to maneu
 
 Pease add a short description of how this is relevant to your game (mechanic, art, theme, etc.). There is no limit to how many references you can have.
 
-1. Fortune Summoners
+1. Fortune Summoners - general gameplay structure (combat & platforming) and out changing outfits to gain powers mechanic was inspired by character swapping in this game.
+
+2. Chibi art style - chosen to make characters cute, and simplify asset creation
