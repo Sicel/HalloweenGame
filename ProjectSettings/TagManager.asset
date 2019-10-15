@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Candy
+  - noFly
+  - yesFly
   layers:
   - Default
   - TransparentFX

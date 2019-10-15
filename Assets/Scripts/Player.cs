@@ -101,6 +101,32 @@ public class Player : Agent
         }
     }
 
+    // Collisions on Triggers for the no fly zone
+    // all of it seems pretty self explanatory. 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "noFly")
+        {
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = false;
+                Debug.Log("Can't fly");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "noFly")
+        {
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = true;
+                Debug.Log("Can fly");
+            }
+        }
+    }
+
     // Displays current costume on screen
     private void OnGUI()
     {
