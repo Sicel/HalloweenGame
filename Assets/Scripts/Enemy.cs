@@ -9,18 +9,17 @@ public class Enemy : Agent
     //public float accelerationValue; //how fast the enemy should accelerate
     bool binDirection; // determines which direction the enemy should move
     Vector2 currentPos;
-    bool onGround;
     Rigidbody2D rigidB;
     public float moveSpeed = 20;
     public Vector2 startPos;
 
-    private void Start()
+    new private void Start()
     {
         rigidB = GetComponent<Rigidbody2D>();
         startPos = transform.position;
     }
 
-    private void Update()
+    new private void Update()
     {
         Move();
     }

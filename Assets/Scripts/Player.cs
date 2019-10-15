@@ -15,7 +15,7 @@ public class Player : Agent
 
     public GameObject collidingEnemy; //enemy player is colliding with
 
-    public float flightTime = 0;
+    public float flightTime = 0; //How long has the player been flying through knockback
 
     // Public magicRush bool and timer
     public bool magicRush = false;
@@ -34,7 +34,7 @@ public class Player : Agent
     List<Color32> costumeColors = new List<Color32>(); // Colors for the temp player
 
     [SerializeField]
-    CostumeManager.Costume currentCostume = CostumeManager.Costume.None; // Current costume as enum
+    Costume currentCostume = Costume.None; // Current costume as enum
 
     [SerializeField]
     CostumeManager manager; // Used to get a list of all costumes
@@ -43,21 +43,15 @@ public class Player : Agent
 
     private void Awake()
     {
-        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets the initial costume
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         rigidB = GetComponent<Rigidbody2D>(); // Gets rigid body component
-
-        _transform = transform;
-
+        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets the initial costume
         spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
+        _transform = transform;
+        BaseCostume.player = this;
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         //access current costume - get & set movement values
 
@@ -108,7 +102,7 @@ public class Player : Agent
         // If at the begining or end of the list of costumes
         if (currentCostume < 0)
         {
-            currentCostume = (CostumeManager.Costume)numCostumes - 1;
+            currentCostume = (Costume)numCostumes - 1;
         }
         else if ((int)currentCostume >= numCostumes)
         {
@@ -121,12 +115,9 @@ public class Player : Agent
     }
 
     // When player comes into contact with another object
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = true;
-        }
+        base.OnCollisionEnter2D(collision);
 
         // If the objet collides with the candy object
         if(collision.gameObject.tag == "Candy")
@@ -144,12 +135,29 @@ public class Player : Agent
         }
     }
 
-    // When player leaves contact with another object
-    private void OnCollisionExit2D(Collision2D collision)
+    // Collisions on Triggers for the no fly zone
+    // all of it seems pretty self explanatory. 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "noFly")
         {
-            onGround = false;
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = false;
+                Debug.Log("Can't fly");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "noFly")
+        {
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = true;
+                Debug.Log("Can fly");
+            }
         }
         if (collision.gameObject.tag == "Enemy")
         {
