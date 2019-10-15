@@ -15,6 +15,8 @@ public class Player : Agent
 
     public GameObject collidingEnemy; //enemy player is colliding with
 
+    public float flightTime = 0;
+
     // Public magicRush bool and timer
     public bool magicRush = false;
 
@@ -72,9 +74,21 @@ public class Player : Agent
 
         if(touchingEnemy == true)
         {
-            Knockback();
+            flightTime = Time.deltaTime; //if touching enemy, start knockback
             //put damage here
         }
+
+        if (flightTime > 0 && flightTime < 0.5f) //if player has been flying more than .5 s, stop knockback
+        {
+            Knockback(20);
+            //add to flight time 
+            flightTime += Time.deltaTime;
+            if(flightTime > 2)
+            {
+                flightTime = 0;
+            }
+        }
+
     }
 
     /// <summary>
@@ -175,14 +189,23 @@ public class Player : Agent
             Debug.Log("Did MR method");
         }
     }
-
-    private void Knockback()
+    /// <summary>
+    /// Knocks player back after enemy contact
+    /// </summary>
+    /// <param name="Speed">How fast the player gets yeeted</param>
+    private void Knockback(float Speed)
     {
+
+        rigidB.velocity = Vector3.zero;
+
         Vector3 pushVector = transform.position - collidingEnemy.transform.position;
 
-        pushVector *= 100;
+        pushVector.Normalize();
 
-        rigidB.AddForce(pushVector);
+        rigidB.velocity = pushVector * Speed;
+        //pushVector *= 500;
+
+        //rigidB.AddForce(pushVector);
 
         Debug.Log("pushing");
     }
