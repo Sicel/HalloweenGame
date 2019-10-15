@@ -9,7 +9,7 @@ public class Player : Agent
 
     public static Transform _transform; // Needed to allow movement
 
-    public static bool onGround = false; // Is the player touching the ground?
+    //public static bool onGround = false; // Is the player touching the ground?
 
     public bool touchingEnemy = false; //is the player in contact with an enemy
 
@@ -135,6 +135,19 @@ public class Player : Agent
         }
     }
 
+    protected override void OnCollisionExit2D(Collision2D collision)
+    {
+        base.OnCollisionExit2D(collision);
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            touchingEnemy = false;
+            //collidingEnemy = collision.gameObject;
+
+        }
+    }
+
     // Collisions on Triggers for the no fly zone
     // all of it seems pretty self explanatory. 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -159,13 +172,7 @@ public class Player : Agent
                 Debug.Log("Can fly");
             }
         }
-        if (collision.gameObject.tag == "Enemy")
-        {
-
-            touchingEnemy = false;
-            //collidingEnemy = collision.gameObject;
-
-        }
+        
     }
 
     // Displays current costume on screen
