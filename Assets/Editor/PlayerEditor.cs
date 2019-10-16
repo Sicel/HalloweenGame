@@ -22,7 +22,7 @@ public class PlayerEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("health"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("costumeColors"));
         EditorGUILayout.PropertyField(currentCostume);
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("manager"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("costumeManager"));
 
         serializedObject.ApplyModifiedProperties();
     }

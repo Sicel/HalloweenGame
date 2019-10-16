@@ -12,23 +12,20 @@ using UnityEngine;
 /// </summary>
 public abstract class BaseCostume : ScriptableObject
 {
-    [SerializeField]
     public float strength = 5; // Costume strength
 
-    [SerializeField]
     public float baseSpeed = 20; // Speed
 
-    [SerializeField]
     [Range(1.0f, 2.0f)]
     public float sprintMultiplier = 1.5f; // Sprint speed (must be a value between 1 and 2)
 
-    [SerializeField]
     public float jumpForce = 100; // Force of jump
 
-    [SerializeField]
-    public bool isAbleToFly = false;
-
     public static Player player;
+
+    public float maxMana = 100;
+
+    public float currentMana = 100;
 
     //public float maxSpeed { get { return baseSpeed; } } 
     public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }

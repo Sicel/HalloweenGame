@@ -9,6 +9,7 @@ TagManager:
   - noFly
   - yesFly
   - Enemy
+  - Water
   layers:
   - Default
   - TransparentFX

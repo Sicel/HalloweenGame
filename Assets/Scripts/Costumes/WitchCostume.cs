@@ -14,23 +14,38 @@ public class WitchCostume : BaseCostume
     [SerializeField]
     bool flyMode = false; // Is the player flying?
 
+    public bool isAbleToFly = true; // Can the player fly?
+
     public override void Move()
     {
         base.Move();
 
-        if (flyMode)
+        if (currentMana <= 0)
         {
-            Fly();
-
-            if (player.onGround)
-                flyMode = !flyMode;
+            currentMana = 0;
+            isAbleToFly = false;
         }
         else
         {
-            Jump();
+            isAbleToFly = true;
+        }
 
-            if (!player.onGround && Input.GetKeyDown(KeyCode.W))
-                flyMode = !flyMode;
+        if (isAbleToFly)
+        {
+            if (flyMode)
+            {
+                Fly();
+
+                if (player.onGround)
+                    flyMode = false;
+            }
+            else
+            {
+                Jump();
+
+                if (!player.onGround && Input.GetKeyDown(KeyCode.W))
+                    flyMode = true;
+            }
         }
     }
 
@@ -43,5 +58,6 @@ public class WitchCostume : BaseCostume
         float vertical = Input.GetAxis("Vertical");
 
         Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, vertical * baseSpeed);
+        currentMana -= 0.5f;// * Time.deltaTime;
     }
 }

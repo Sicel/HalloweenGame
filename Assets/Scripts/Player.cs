@@ -34,29 +34,30 @@ public class Player : Agent
     List<Color32> costumeColors = new List<Color32>(); // Colors for the temp player
 
     [SerializeField]
-    Costume currentCostume = Costume.None; // Current costume as enum
+    Costume currentCostume; // Current costume as enum
 
     [SerializeField]
-    CostumeManager manager; // Used to get a list of all costumes
+    CostumeManager costumeManager; // Used to get a list of all costumes
 
     public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
 
     private void Awake()
     {
         rigidB = GetComponent<Rigidbody2D>(); // Gets rigid body component
-        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets the initial costume
         spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
+        currentCostume = Costume.None;
         _transform = transform;
         BaseCostume.player = this;
+    }
+
+    new private void Start()
+    {
+        currentCostumeScript = LevelManager.CostumeList[(int)currentCostume]; // Sets the initial costume
     }
 
     // Update is called once per frame
     new void Update()
     {
-        //access current costume - get & set movement values
-
-
-
         ChangeCostume();
         currentCostumeScript.Move(); // Moves using currently equipped costume's movement method
 
@@ -81,6 +82,11 @@ public class Player : Agent
             {
                 flightTime = 0;
             }
+        }
+
+        if (transform.position.y < -25)
+        {
+            LevelManager.Reset();
         }
 
     }
@@ -109,7 +115,7 @@ public class Player : Agent
             currentCostume = 0;
         }
 
-        currentCostumeScript = manager.costumeScripts[(int)currentCostume]; // Sets costume
+        currentCostumeScript = LevelManager.CostumeList[(int)currentCostume]; // Sets costume
 
         spriteR.color = costumeColors[(int)currentCostume]; // Changes color of temp player
     }
@@ -119,19 +125,17 @@ public class Player : Agent
     {
         base.OnCollisionEnter2D(collision);
 
-        // If the objet collides with the candy object
-        if(collision.gameObject.tag == "Candy")
+        switch (collision.gameObject.tag)
         {
-            // Set our MR bool
-            magicRush = true;
-        }
-
-        if(collision.gameObject.tag == "Enemy")
-        {
-
-            touchingEnemy = true;
-            collidingEnemy = collision.gameObject;
-            
+            // If the objet collides with the candy object
+            case "Candy":
+                // Set our MR bool
+                magicRush = true;
+                break;
+            case "Enemy":
+                touchingEnemy = true;
+                collidingEnemy = collision.gameObject;
+                break;
         }
     }
 
@@ -152,13 +156,19 @@ public class Player : Agent
     // all of it seems pretty self explanatory. 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "noFly")
+        switch (collision.gameObject.tag)
         {
-            if (CurrentCostume == "Witch")
-            {
-                currentCostumeScript.isAbleToFly = false;
-                Debug.Log("Can't fly");
-            }
+            case "noFly":
+                if (CurrentCostume == "Witch")
+                {
+                    WitchCostume witch = currentCostumeScript as WitchCostume;
+                    witch.isAbleToFly = false;
+                    Debug.Log("Can't fly");
+                }
+                break;
+            case "Water":
+                LevelManager.Reset();
+                break;
         }
     }
 
@@ -168,7 +178,8 @@ public class Player : Agent
         {
             if (CurrentCostume == "Witch")
             {
-                currentCostumeScript.isAbleToFly = true;
+                WitchCostume witch = currentCostumeScript as WitchCostume;
+                witch.isAbleToFly = true;
                 Debug.Log("Can fly");
             }
         }
@@ -178,7 +189,7 @@ public class Player : Agent
     // Displays current costume on screen
     private void OnGUI()
     {
-        GUILayout.Box("Current Costume: " + currentCostume);
+        GUILayout.Box("Current Costume: " + currentCostume + "\nCurrent Mana: " + currentCostumeScript.currentMana);
     }
 
     // Method for Magic Rush
