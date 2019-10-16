@@ -20,7 +20,6 @@ public class CostumeManager : ScriptableObject
     // Number of costumes
     public static int numCostumes = Enum.GetNames(typeof(Costume)).Length; 
 
-
     // List of costume scripts
     [SerializeField] public List<BaseCostume> costumeScripts = new List<BaseCostume>();
 }
