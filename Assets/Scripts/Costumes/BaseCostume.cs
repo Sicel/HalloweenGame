@@ -48,6 +48,7 @@ public abstract class BaseCostume : ScriptableObject
         {
             Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, Player.rigidB.velocity.y);
         }
+        
     }
 
     /*

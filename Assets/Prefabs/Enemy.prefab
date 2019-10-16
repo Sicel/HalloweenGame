@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2361055584033816479}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,9 +99,11 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   maxSpeed: 10
+  accelerationValue: 10
   mass: 5
   gravity: 9.81
-  accelerationValue: 10
+  moveSpeed: 20
+  startPos: {x: 0, y: 0}
 --- !u!50 &2361055584033816475
 Rigidbody2D:
   serializedVersion: 4

@@ -9,6 +9,14 @@ public class Player : Agent
 
     public static Transform _transform; // Needed to allow movement
 
+    //public static bool onGround = false; // Is the player touching the ground?
+
+    public bool touchingEnemy = false; //is the player in contact with an enemy
+
+    public GameObject collidingEnemy; //enemy player is colliding with
+
+    public float flightTime = 0; //How long has the player been flying through knockback
+
     // Public magicRush bool and timer
     public bool magicRush = false;
 
@@ -57,6 +65,24 @@ public class Player : Agent
         {
             MagicRush();
         }
+
+        if(touchingEnemy == true)
+        {
+            flightTime = Time.deltaTime; //if touching enemy, start knockback
+            //put damage here
+        }
+
+        if (flightTime > 0 && flightTime < 0.5f) //if player has been flying more than .5 s, stop knockback
+        {
+            Knockback(20);
+            //add to flight time 
+            flightTime += Time.deltaTime;
+            if(flightTime > 2)
+            {
+                flightTime = 0;
+            }
+        }
+
     }
 
     /// <summary>
@@ -99,6 +125,54 @@ public class Player : Agent
             // Set our MR bool
             magicRush = true;
         }
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+
+            touchingEnemy = true;
+            collidingEnemy = collision.gameObject;
+            
+        }
+    }
+
+    protected override void OnCollisionExit2D(Collision2D collision)
+    {
+        base.OnCollisionExit2D(collision);
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            touchingEnemy = false;
+            //collidingEnemy = collision.gameObject;
+
+        }
+    }
+
+    // Collisions on Triggers for the no fly zone
+    // all of it seems pretty self explanatory. 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "noFly")
+        {
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = false;
+                Debug.Log("Can't fly");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "noFly")
+        {
+            if (CurrentCostume == "Witch")
+            {
+                currentCostumeScript.isAbleToFly = true;
+                Debug.Log("Can fly");
+            }
+        }
+        
     }
 
     // Displays current costume on screen
@@ -129,5 +203,25 @@ public class Player : Agent
             timer = 2f;
             Debug.Log("Did MR method");
         }
+    }
+    /// <summary>
+    /// Knocks player back after enemy contact
+    /// </summary>
+    /// <param name="Speed">How fast the player gets yeeted</param>
+    private void Knockback(float Speed)
+    {
+
+        rigidB.velocity = Vector3.zero;
+
+        Vector3 pushVector = transform.position - collidingEnemy.transform.position;
+
+        pushVector.Normalize();
+
+        rigidB.velocity = pushVector * Speed;
+        //pushVector *= 500;
+
+        //rigidB.AddForce(pushVector);
+
+        Debug.Log("pushing");
     }
 }
