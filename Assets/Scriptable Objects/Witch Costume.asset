@@ -15,9 +15,9 @@ MonoBehaviour:
   strength: 5
   baseSpeed: 10
   sprintMultiplier: 1.5
-  jumpForce: 100
+  jumpForce: 3
   maxMana: 100
-  currentMana: 100
+  currentMana: 0
   projectile: {fileID: 0}
   flyMode: 1
   isAbleToFly: 0

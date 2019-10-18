@@ -7,9 +7,10 @@ using UnityEngine;
 /// </summary>
 [CreateAssetMenu(menuName = "Costume Stats/Cat Stats")]
 public class CatCostume : BaseCostume
-{ 
-    public override void Move()
+{
+    //[Header("Cat Costume")]
+    public override void Update()
     {
-        base.Move();
+        base.Update();
     }
 }

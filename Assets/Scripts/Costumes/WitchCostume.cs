@@ -8,13 +8,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Costume Stats/Witch Stats")]
 public class WitchCostume : BaseCostume
 {
+    [Header("Witch Costume")]
     [SerializeField]
     GameObject projectile; // Projectile that will be fired
 
     [SerializeField]
     bool flyMode = false; // Is the player flying?
 
-    public bool isAbleToFly = true; // Can the player fly?
+    public bool isAbleToFly = true; // Is the COSTUME able to fly?
 
     public override void Move()
     {
@@ -30,7 +31,8 @@ public class WitchCostume : BaseCostume
             isAbleToFly = true;
         }
 
-        if (isAbleToFly)
+        // If both player and costume are to fly they can
+        if (isAbleToFly && player.isAbleToFly)
         {
             if (flyMode)
             {
@@ -58,6 +60,6 @@ public class WitchCostume : BaseCostume
         float vertical = Input.GetAxis("Vertical");
 
         Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, vertical * baseSpeed);
-        currentMana -= 0.5f;// * Time.deltaTime;
+        currentMana -= manaConsumptionRate * Time.deltaTime;
     }
 }

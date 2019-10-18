@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         costumeManager = (CostumeManager)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Costume Manager.asset", typeof(CostumeManager));
-        Debug.Log(costumeManager);
     }
 
     // Start is called before the first frame update

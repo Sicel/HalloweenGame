@@ -12,6 +12,7 @@ using UnityEngine;
 /// </summary>
 public abstract class BaseCostume : ScriptableObject
 {
+    [Header("Base Costume Stats")]
     public float strength = 5; // Costume strength
 
     public float baseSpeed = 20; // Speed
@@ -19,13 +20,15 @@ public abstract class BaseCostume : ScriptableObject
     [Range(1.0f, 2.0f)]
     public float sprintMultiplier = 1.5f; // Sprint speed (must be a value between 1 and 2)
 
-    public float jumpForce = 100; // Force of jump
+    public float jumpForce = 8; // Force of jump
 
     public static Player player;
 
     public float maxMana = 100;
 
     public float currentMana = 100;
+
+    public float manaConsumptionRate = 2f;
 
     //public float maxSpeed { get { return baseSpeed; } } 
     public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }
@@ -46,6 +49,11 @@ public abstract class BaseCostume : ScriptableObject
             Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, Player.rigidB.velocity.y);
         }
         
+    }
+
+    public virtual void Update()
+    {
+        Move();
     }
 
     /*
@@ -101,7 +109,7 @@ public abstract class BaseCostume : ScriptableObject
     protected void Jump()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            Player.rigidB.AddForce(new Vector2(0, jumpForce));
+            Player.rigidB.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 
     }
 
@@ -110,29 +118,6 @@ public abstract class BaseCostume : ScriptableObject
     /// </summary>
     public virtual void Move()
     {
-
-        //Vector2 netForce = CalcSteeringForces();
-        //ApplyForce(netForce);
-        //
-        //velocity += acceleration * Time.deltaTime;
-        //if (Mathf.Abs(velocity.x) > baseSpeed)
-        //{
-        //
-        //    if (velocity.x > 0)
-        //    {
-        //        velocity.x = baseSpeed;
-        //    }
-        //    else
-        //    {
-        //        velocity.x = -baseSpeed;
-        //    }
-        //}
-        //agentPosition += velocity * Time.deltaTime;
-        //
-        //acceleration = Vector3.zero; //reset acceleration for next loop
-        //Player._transform.position = agentPosition;
-
-
         HorizontalMovement();
 
         // Allows jumping only if player is on ground

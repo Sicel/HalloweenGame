@@ -24,6 +24,8 @@ public class Player : Agent
 
     public BaseCostume currentCostumeScript = null; // Script of current costume
 
+    public bool isAbleToFly = true; // Can the PLAYER fly
+
     [SerializeField]
     int health = 3; // Health points
 
@@ -35,9 +37,6 @@ public class Player : Agent
 
     [SerializeField]
     Costume currentCostume; // Current costume as enum
-
-    [SerializeField]
-    CostumeManager costumeManager; // Used to get a list of all costumes
 
     public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
 
@@ -59,7 +58,7 @@ public class Player : Agent
     new void Update()
     {
         ChangeCostume();
-        currentCostumeScript.Move(); // Moves using currently equipped costume's movement method
+        currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
 
         // Player rushes
         if (magicRush)
@@ -145,10 +144,8 @@ public class Player : Agent
 
         if (collision.gameObject.tag == "Enemy")
         {
-
             touchingEnemy = false;
             //collidingEnemy = collision.gameObject;
-
         }
     }
 
@@ -159,12 +156,8 @@ public class Player : Agent
         switch (collision.gameObject.tag)
         {
             case "noFly":
-                if (CurrentCostume == "Witch")
-                {
-                    WitchCostume witch = currentCostumeScript as WitchCostume;
-                    witch.isAbleToFly = false;
-                    Debug.Log("Can't fly");
-                }
+                Debug.Log("Can't fly");
+                isAbleToFly = false;
                 break;
             case "Water":
                 LevelManager.Reset();
@@ -176,12 +169,8 @@ public class Player : Agent
     {
         if (collision.gameObject.tag == "noFly")
         {
-            if (CurrentCostume == "Witch")
-            {
-                WitchCostume witch = currentCostumeScript as WitchCostume;
-                witch.isAbleToFly = true;
-                Debug.Log("Can fly");
-            }
+            isAbleToFly = true;
+            Debug.Log("Can fly");
         }
         
     }
@@ -189,7 +178,7 @@ public class Player : Agent
     // Displays current costume on screen
     private void OnGUI()
     {
-        GUILayout.Box("Current Costume: " + currentCostume + "\nCurrent Mana: " + currentCostumeScript.currentMana);
+        GUILayout.Box("Current Costume: " + currentCostume + "\nCurrent Mana: " + Mathf.Floor(currentCostumeScript.currentMana));
     }
 
     // Method for Magic Rush

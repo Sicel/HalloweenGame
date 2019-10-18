@@ -12,16 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ee95d0780364442ab0e3ca23919fe7, type: 3}
   m_Name: None Costume
   m_EditorClassIdentifier: 
-  agentPosition: {x: 0, y: 0, z: 0}
-  acceleration: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 10
-  accelerationValue: 10
-  mass: 5
-  gravity: 9.81
   strength: 5
   baseSpeed: 15
   sprintMultiplier: 1.5
-  jumpForce: 100
-  isAbleToFly: 0
+  jumpForce: 8
+  maxMana: 100
+  currentMana: 100
