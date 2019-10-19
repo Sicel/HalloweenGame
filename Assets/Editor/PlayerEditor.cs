@@ -20,10 +20,11 @@ public class PlayerEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("health"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("rayDistance"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isAbleToFly"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("costumeColors"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("onGround"));
         EditorGUILayout.PropertyField(currentCostume);
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("costumeManager"));
 
         serializedObject.ApplyModifiedProperties();
     }

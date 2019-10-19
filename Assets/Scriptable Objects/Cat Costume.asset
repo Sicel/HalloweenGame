@@ -15,6 +15,7 @@ MonoBehaviour:
   strength: 5
   baseSpeed: 20
   sprintMultiplier: 1.5
-  jumpForce: 6
+  jumpForce: 8
   maxMana: 100
   currentMana: 100
+  manaConsumptionRate: 2

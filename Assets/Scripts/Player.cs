@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class Player : Agent
 {
-    public static Rigidbody2D rigidB; // Needed to allow movement
-
-    public static Transform _transform; // Needed to allow movement
-
-    //public static bool onGround = false; // Is the player touching the ground?
-
     public bool touchingEnemy = false; //is the player in contact with an enemy
 
     public GameObject collidingEnemy; //enemy player is colliding with
@@ -26,9 +20,6 @@ public class Player : Agent
 
     public bool isAbleToFly = true; // Can the PLAYER fly
 
-    [SerializeField]
-    int health = 3; // Health points
-
     SpriteRenderer spriteR; // Player's Sprite rendere (temp)
     int numCostumes = CostumeManager.numCostumes; // Num of total costumes used for iteration in ChangeCostume()
 
@@ -39,13 +30,13 @@ public class Player : Agent
     Costume currentCostume; // Current costume as enum
 
     public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
+    public Rigidbody2D RigidBody { get { return rigidBody; } }
 
-    private void Awake()
+    new private void Awake()
     {
-        rigidB = GetComponent<Rigidbody2D>(); // Gets rigid body component
+        base.Awake();
         spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
         currentCostume = Costume.None;
-        _transform = transform;
         BaseCostume.player = this;
     }
 
@@ -57,6 +48,8 @@ public class Player : Agent
     // Update is called once per frame
     new void Update()
     {
+        Debug.Log(isFalling);
+        base.Update();
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
 
@@ -95,6 +88,8 @@ public class Player : Agent
     /// </summary>
     void ChangeCostume()
     {
+        Costume previousCostume = currentCostume;
+
         if (Input.GetKeyDown(KeyCode.Comma))
         {
             currentCostume--;
@@ -114,6 +109,12 @@ public class Player : Agent
             currentCostume = 0;
         }
 
+        //if (previousCostume == Costume.Witch)
+        //{
+        //    WitchCostume witch = (WitchCostume)LevelManager.CostumeList[(int)Costume.Witch];
+        //    witch.flyMode = false;
+        //}
+
         currentCostumeScript = LevelManager.CostumeList[(int)currentCostume]; // Sets costume
 
         spriteR.color = costumeColors[(int)currentCostume]; // Changes color of temp player
@@ -126,11 +127,6 @@ public class Player : Agent
 
         switch (collision.gameObject.tag)
         {
-            // If the objet collides with the candy object
-            case "Candy":
-                // Set our MR bool
-                magicRush = true;
-                break;
             case "Enemy":
                 touchingEnemy = true;
                 collidingEnemy = collision.gameObject;
@@ -158,6 +154,12 @@ public class Player : Agent
             case "noFly":
                 Debug.Log("Can't fly");
                 isAbleToFly = false;
+                break;
+            // If the objet collides with the candy object
+            case "Candy":
+                // Set our MR bool
+                magicRush = true;
+                Destroy(collision.gameObject);
                 break;
             case "Water":
                 LevelManager.Reset();
@@ -211,13 +213,13 @@ public class Player : Agent
     private void Knockback(float Speed)
     {
 
-        rigidB.velocity = Vector3.zero;
+        rigidBody.velocity = Vector3.zero;
 
         Vector3 pushVector = transform.position - collidingEnemy.transform.position;
 
         pushVector.Normalize();
 
-        rigidB.velocity = pushVector * Speed;
+        rigidBody.velocity = pushVector * Speed;
         //pushVector *= 500;
 
         //rigidB.AddForce(pushVector);

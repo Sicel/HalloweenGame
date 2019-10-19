@@ -17,7 +17,8 @@ MonoBehaviour:
   sprintMultiplier: 1.5
   jumpForce: 3
   maxMana: 100
-  currentMana: 0
+  currentMana: 64.79006
+  manaConsumptionRate: 6
   projectile: {fileID: 0}
   flyMode: 1
-  isAbleToFly: 0
+  isAbleToFly: 1

@@ -131,9 +131,10 @@ GameObject:
   - component: {fileID: 13845506}
   - component: {fileID: 13845505}
   - component: {fileID: 13845504}
+  - component: {fileID: 13845507}
   m_Layer: 0
   m_Name: catPlatform
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +150,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -226,6 +227,25 @@ Transform:
   m_Father: {fileID: 1192307333}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!251 &13845507
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13845503}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &168947741
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,9 +257,10 @@ GameObject:
   - component: {fileID: 168947742}
   - component: {fileID: 168947744}
   - component: {fileID: 168947743}
+  - component: {fileID: 168947745}
   m_Layer: 0
-  m_Name: Ground (7)
-  m_TagString: Ground
+  m_Name: Platform (2)
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +290,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -332,6 +353,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &168947745
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168947741}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &247757670
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +454,7 @@ GameObject:
   - component: {fileID: 297583912}
   m_Layer: 0
   m_Name: Ground (4)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -613,6 +653,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &483633341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483633342}
+  m_Layer: 0
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &483633342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483633341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0695, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1781678319}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811439681
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +696,7 @@ GameObject:
   - component: {fileID: 811439682}
   m_Layer: 0
   m_Name: Ground (3)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -732,7 +802,7 @@ GameObject:
   - component: {fileID: 845085587}
   m_Layer: 0
   m_Name: Ground (1)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -836,9 +906,10 @@ GameObject:
   - component: {fileID: 872424352}
   - component: {fileID: 872424354}
   - component: {fileID: 872424353}
+  - component: {fileID: 872424356}
   m_Layer: 0
-  m_Name: Ground (6)
-  m_TagString: Ground
+  m_Name: Platform (1)
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -868,7 +939,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -931,6 +1002,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &872424356
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872424351}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1064235863
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,9 +1032,10 @@ GameObject:
   - component: {fileID: 1064235864}
   - component: {fileID: 1064235866}
   - component: {fileID: 1064235865}
+  - component: {fileID: 1064235867}
   m_Layer: 0
-  m_Name: Ground (8)
-  m_TagString: Ground
+  m_Name: Platform (3)
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -974,7 +1065,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -1037,6 +1128,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &1064235867
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064235863}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1139844869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,9 +1413,10 @@ GameObject:
   - component: {fileID: 1398845772}
   - component: {fileID: 1398845774}
   - component: {fileID: 1398845773}
+  - component: {fileID: 1398845775}
   m_Layer: 0
   m_Name: Upper Platform
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1335,7 +1446,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -1398,6 +1509,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &1398845775
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398845771}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1434089022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,9 +1645,10 @@ GameObject:
   - component: {fileID: 1643652856}
   - component: {fileID: 1643652858}
   - component: {fileID: 1643652857}
+  - component: {fileID: 1643652859}
   m_Layer: 0
-  m_Name: Ground (3)
-  m_TagString: Ground
+  m_Name: Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1547,7 +1678,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.00016987324, y: 0.00041629374}
   m_SpriteTilingProperty:
@@ -1610,6 +1741,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &1643652859
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643652855}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1683406370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,8 +1927,8 @@ GameObject:
   - component: {fileID: 1963531422}
   - component: {fileID: 1963531421}
   m_Layer: 0
-  m_Name: Ground (4)
-  m_TagString: Ground
+  m_Name: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2461,6 +2611,11 @@ PrefabInstance:
       propertyPath: currentCostume
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4563779121260416107, guid: 60a68a90087e4404aa6906dd8110a20b,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60a68a90087e4404aa6906dd8110a20b, type: 3}
 --- !u!1001 &6091530200466929025
@@ -2478,12 +2633,12 @@ PrefabInstance:
     - target: {fileID: 5580433481789952960, guid: ce3a5f6ff5bfc9f409a77619b65c9792,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18
+      value: 17.54
       objectReference: {fileID: 0}
     - target: {fileID: 5580433481789952960, guid: ce3a5f6ff5bfc9f409a77619b65c9792,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.94
+      value: 7.71
       objectReference: {fileID: 0}
     - target: {fileID: 5580433481789952960, guid: ce3a5f6ff5bfc9f409a77619b65c9792,
         type: 3}
@@ -2530,5 +2685,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3987912705502523618, guid: ce3a5f6ff5bfc9f409a77619b65c9792,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -955898743713260902, guid: ce3a5f6ff5bfc9f409a77619b65c9792,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3987912705502523618, guid: ce3a5f6ff5bfc9f409a77619b65c9792, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ce3a5f6ff5bfc9f409a77619b65c9792, type: 3}

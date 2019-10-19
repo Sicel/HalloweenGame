@@ -42,11 +42,11 @@ public abstract class BaseCostume : ScriptableObject
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Player.rigidB.velocity = new Vector2(horizontal * sprintSpeed, Player.rigidB.velocity.y);
+            player.RigidBody.velocity = new Vector2(horizontal * sprintSpeed, player.RigidBody.velocity.y);
         }
         else
         {
-            Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, Player.rigidB.velocity.y);
+            player.RigidBody.velocity = new Vector2(horizontal * baseSpeed, player.RigidBody.velocity.y);
         }
         
     }
@@ -109,7 +109,7 @@ public abstract class BaseCostume : ScriptableObject
     protected void Jump()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            Player.rigidB.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            player.RigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
 
     }
 
@@ -123,5 +123,10 @@ public abstract class BaseCostume : ScriptableObject
         // Allows jumping only if player is on ground
         if (player.onGround)
             Jump();
+    }
+
+    void RegenMana()
+    {
+
     }
 }

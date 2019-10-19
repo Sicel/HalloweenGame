@@ -4,6 +4,13 @@ using UnityEngine;
 
 public abstract class Agent : MonoBehaviour
 {
+    [Header("Agent")]
+
+    public int health = 3; // Health points
+    public bool onGround = false;
+    public bool isFalling = false;
+    protected Vector3 prevLocation;
+
     //movement vectors
     public Vector3 agentPosition; //current position of agent
     public Vector3 acceleration; //value to be added (or subtracted) to velocity
@@ -13,7 +20,16 @@ public abstract class Agent : MonoBehaviour
     public float accelerationValue; //magnitude of acceleration, independent of maxSpeed
     public float mass; //mass of the agent, defaulted to 1
     public float gravity;
-    public bool onGround = false;
+
+    protected Rigidbody2D rigidBody;
+    protected Collider2D collisionBox;
+    public float rayDistance = 0.5f;
+
+    protected void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+        collisionBox = GetComponent<Collider2D>();
+    }
 
     // Start is called before the first frame update
     protected void Start()
@@ -25,7 +41,40 @@ public abstract class Agent : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        
+        DetectGround();
+        prevLocation = transform.position;
+    }
+
+    // Trying to detect the ground using raycast
+    void DetectGround()
+    {
+        float bottomEdge = transform.position.y - collisionBox.bounds.extents.y;
+        float leftEdge = transform.position.x - collisionBox.bounds.extents.x;
+        float rightEdge = transform.position.x + collisionBox.bounds.extents.x;
+
+        Ray2D leftRay = new Ray2D(new Vector2(leftEdge, bottomEdge), new Vector2(-transform.position.x, bottomEdge - 0.5f));
+        Ray2D rightRay = new Ray2D(new Vector2(rightEdge, bottomEdge), new Vector2(transform.position.x, bottomEdge - 0.5f));
+
+        //RaycastHit2D thingHit = Physics2D.Raycast(new Vector2(transform.position.x, bottomEdge), Vector2.down);
+        //switch (thingHit.collider.gameObject.tag)
+        //{
+        //    case "Ground":
+        //        onGround = true;
+        //}
+    }
+
+    // Draws the raycast
+    private void OnDrawGizmos()
+    {
+        //float bottomEdge = transform.position.y - collisionBox.bounds.extents.y;
+        //float leftEdge = transform.position.x - collisionBox.bounds.extents.x;
+        //float rightEdge = transform.position.x + collisionBox.bounds.extents.x;
+        //
+        //Ray2D leftRay = new Ray2D(new Vector2(leftEdge, bottomEdge), new Vector2(1, -1));
+        //Ray2D rightRay = new Ray2D(new Vector2(rightEdge, bottomEdge), new Vector2(-1, -1));
+        //
+        //Gizmos.DrawRay(leftRay.origin, leftRay.direction);
+        //Gizmos.DrawRay(rightRay.origin, rightRay.direction);
     }
 
     /// <summary>
@@ -59,18 +108,24 @@ public abstract class Agent : MonoBehaviour
     // When player comes into contact with another object
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        switch (collision.gameObject.tag)
         {
-            onGround = true;
+            case "Ground":
+            case "Platform":
+                onGround = true;
+                break;
         }
     }
 
     // When player leaves contact with another object
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        switch (collision.gameObject.tag)
         {
-            onGround = false;
+            case "Ground":
+            case "Platform":
+                onGround = false;
+                break;
         }
     }
 }

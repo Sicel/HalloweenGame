@@ -9,13 +9,13 @@ public class Enemy : Agent
     //public float accelerationValue; //how fast the enemy should accelerate
     bool binDirection; // determines which direction the enemy should move
     Vector2 currentPos;
-    Rigidbody2D rigidB;
+
+    [Header("Enemy")]
     public float moveSpeed = 20;
     public Vector2 startPos;
 
     new private void Start()
     {
-        rigidB = GetComponent<Rigidbody2D>();
         startPos = transform.position;
     }
 
@@ -31,11 +31,11 @@ public class Enemy : Agent
         //{
         //    moveSpeed = -moveSpeed;
         //}
-        if(rigidB.position.x > startPos.x + 4)
+        if(rigidBody.position.x > startPos.x + 4)
         {
             moveSpeed = -5;
         }
-        if(rigidB.position.x < startPos.x - 4)
+        if(rigidBody.position.x < startPos.x - 4)
         {
             moveSpeed = 5;
         }
@@ -43,11 +43,7 @@ public class Enemy : Agent
         //Debug.Log("rigidb " + rigidB.position.x);
         //Debug.Log("transform " + transform.position.x);
 
-
-
-
-
-        rigidB.velocity = new Vector2(moveSpeed, rigidB.velocity.y);
+        rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
     }
 
     /*

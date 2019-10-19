@@ -12,8 +12,7 @@ public class WitchCostume : BaseCostume
     [SerializeField]
     GameObject projectile; // Projectile that will be fired
 
-    [SerializeField]
-    bool flyMode = false; // Is the player flying?
+    public bool flyMode = false; // Is the player flying?
 
     public bool isAbleToFly = true; // Is the COSTUME able to fly?
 
@@ -59,7 +58,8 @@ public class WitchCostume : BaseCostume
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Player.rigidB.velocity = new Vector2(horizontal * baseSpeed, vertical * baseSpeed);
+        player.RigidBody.velocity = new Vector2(horizontal * baseSpeed, vertical * baseSpeed);
+        Debug.Log(vertical * baseSpeed);
         currentMana -= manaConsumptionRate * Time.deltaTime;
     }
 }

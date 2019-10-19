@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: None Costume
   m_EditorClassIdentifier: 
   strength: 5
-  baseSpeed: 15
+  baseSpeed: 10
   sprintMultiplier: 1.5
-  jumpForce: 8
+  jumpForce: 12
   maxMana: 100
   currentMana: 100
+  manaConsumptionRate: 2
