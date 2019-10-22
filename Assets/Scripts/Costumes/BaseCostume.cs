@@ -17,43 +17,64 @@ public abstract class BaseCostume : ScriptableObject
 
     public float baseSpeed = 20; // Speed
 
-    [Range(1.0f, 2.0f)]
-    public float sprintMultiplier = 1.5f; // Sprint speed (must be a value between 1 and 2)
-
     public float jumpForce = 8; // Force of jump
 
     public static Player player;
 
-    public float maxMana = 100;
+    public float maxResource = 100;
 
-    public float currentMana = 100;
+    public float currentResource = 100;
 
-    public float manaConsumptionRate = 2f;
+    public float prevResource;
 
-    //public float maxSpeed { get { return baseSpeed; } } 
-    public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }
+    public float resourceConsumptionRate = 2f;
+
+    public float resourceRegenRate = 1f;
+
+    public float timeUntilResourceRegen = 1.5f;
+
+    [SerializeField]
+    float currentTime = 0;
+
 
     /// <summary>
     /// Allows movement and sprinting on the horizontal axis 
     /// </summary>
-    protected void HorizontalMovement()
+    protected virtual void HorizontalMovement()
     {
         float horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            player.RigidBody.velocity = new Vector2(horizontal * sprintSpeed, player.RigidBody.velocity.y);
-        }
-        else
-        {
-            player.RigidBody.velocity = new Vector2(horizontal * baseSpeed, player.RigidBody.velocity.y);
-        }
+        player.RigidBody.velocity = new Vector2(horizontal * baseSpeed, player.RigidBody.velocity.y);
         
     }
 
     public virtual void Update()
-    {
+    { 
         Move();
+        if (prevResource <= currentResource)
+        {
+            if (currentResource < maxResource && currentTime >= timeUntilResourceRegen)
+            {
+                RegenResource();
+            }
+        }
+        else
+        {
+            currentTime = 0;
+        }
+
+        currentTime += Time.deltaTime;
+        prevResource = currentResource;
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Attack();
+        }
+    }
+
+    public virtual void Attack()
+    {
+
     }
 
     /*
@@ -125,8 +146,8 @@ public abstract class BaseCostume : ScriptableObject
             Jump();
     }
 
-    void RegenMana()
+    void RegenResource()
     {
-
+        currentResource += resourceRegenRate * Time.deltaTime;
     }
 }

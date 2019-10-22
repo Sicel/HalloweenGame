@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 5
   baseSpeed: 10
-  sprintMultiplier: 1.5
   jumpForce: 3
-  maxMana: 100
-  currentMana: 64.79006
-  manaConsumptionRate: 6
-  projectile: {fileID: 0}
+  maxResource: 100
+  currentResource: 100
+  prevResource: 0
+  resourceConsumptionRate: 2
+  resourceRegenRate: 1
+  timeUntilResourceRegen: 1.5
+  currentTime: 0
+  projectile: {fileID: 5143405325807389204, guid: d4e6014ef3cc0164d88af8e6096e0ed8,
+    type: 3}
   flyMode: 1
   isAbleToFly: 1
