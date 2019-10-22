@@ -53,7 +53,7 @@ public class Player : Agent
     // Update is called once per frame
     new void Update()
     {
-        Debug.Log(onGround);
+        //Debug.Log(onGround);
         base.Update();
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method

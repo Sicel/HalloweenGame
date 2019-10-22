@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2ee95d0780364442ab0e3ca23919fe7, type: 3}
-  m_Name: New Bunny Costume
+  m_Name: Bunny Costume
   m_EditorClassIdentifier: Assembly-CSharp::BunnyCostume
   strength: 5
   baseSpeed: 20
