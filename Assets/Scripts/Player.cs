@@ -20,14 +20,17 @@ public class Player : Agent
 
     public bool isAbleToFly = true; // Can the PLAYER fly
 
-    SpriteRenderer spriteR; // Player's Sprite rendere (temp)
-    int numCostumes = CostumeManager.numCostumes; // Num of total costumes used for iteration in ChangeCostume()
-
     [SerializeField]
     List<Color32> costumeColors = new List<Color32>(); // Colors for the temp player
 
     [SerializeField]
     Costume currentCostume; // Current costume as enum
+
+    SpriteRenderer spriteR; // Player's Sprite rendere (temp)
+    int numCostumes = CostumeManager.numCostumes; // Num of total costumes used for iteration in ChangeCostume()
+    Vector3 startingScale;
+    Vector3 alteredScale;
+    bool altered;
 
     public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
     public Rigidbody2D RigidBody { get { return rigidBody; } }
@@ -36,19 +39,21 @@ public class Player : Agent
     {
         base.Awake();
         spriteR = GetComponent<SpriteRenderer>(); // Gets sprite renderer component
-        currentCostume = Costume.None;
+        currentCostume = Costume.Bunny;
         BaseCostume.player = this;
     }
 
     new private void Start()
     {
         currentCostumeScript = LevelManager.CostumeList[(int)currentCostume]; // Sets the initial costume
+        startingScale = transform.localScale;
+        alteredScale = new Vector2(startingScale.y, startingScale.x);
     }
 
     // Update is called once per frame
     new void Update()
     {
-        Debug.Log(isFalling);
+        Debug.Log(onGround);
         base.Update();
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
@@ -88,8 +93,6 @@ public class Player : Agent
     /// </summary>
     void ChangeCostume()
     {
-        Costume previousCostume = currentCostume;
-
         if (Input.GetKeyDown(KeyCode.Comma))
         {
             currentCostume--;
@@ -109,11 +112,19 @@ public class Player : Agent
             currentCostume = 0;
         }
 
-        //if (previousCostume == Costume.Witch)
-        //{
-        //    WitchCostume witch = (WitchCostume)LevelManager.CostumeList[(int)Costume.Witch];
-        //    witch.flyMode = false;
-        //}
+        if (currentCostume == Costume.Cat)
+        {
+            if (!altered)
+            {
+                transform.localScale = alteredScale;
+                altered = true;
+            }
+        }
+        else
+        {
+            transform.localScale = startingScale;
+            altered = false;
+        }
 
         currentCostumeScript = LevelManager.CostumeList[(int)currentCostume]; // Sets costume
 
@@ -121,9 +132,9 @@ public class Player : Agent
     }
 
     // When player comes into contact with another object
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    new protected void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision);
+        //base.OnCollisionEnter2D(collision);
 
         switch (collision.gameObject.tag)
         {
@@ -134,9 +145,9 @@ public class Player : Agent
         }
     }
 
-    protected override void OnCollisionExit2D(Collision2D collision)
+    new protected void OnCollisionExit2D(Collision2D collision)
     {
-        base.OnCollisionExit2D(collision);
+        //base.OnCollisionExit2D(collision);
 
         if (collision.gameObject.tag == "Enemy")
         {
@@ -180,7 +191,7 @@ public class Player : Agent
     // Displays current costume on screen
     private void OnGUI()
     {
-        GUILayout.Box("Current Costume: " + currentCostume + "\nCurrent Mana: " + Mathf.Floor(currentCostumeScript.currentMana));
+        GUILayout.Box("Current Costume: " + currentCostume + "\nCurrent Resource: " + Mathf.Floor(currentCostumeScript.currentResource));
     }
 
     // Method for Magic Rush

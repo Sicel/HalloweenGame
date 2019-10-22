@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2ee95d0780364442ab0e3ca23919fe7, type: 3}
-  m_Name: None Costume
-  m_EditorClassIdentifier: 
+  m_Name: New Bunny Costume
+  m_EditorClassIdentifier: Assembly-CSharp::BunnyCostume
   strength: 5
-  baseSpeed: 10
-  sprintMultiplier: 1.5
+  baseSpeed: 20
   jumpForce: 12
-  maxMana: 100
-  currentMana: 100
-  manaConsumptionRate: 2
+  maxResource: 100
+  currentResource: 100
+  prevResource: 100
+  resourceConsumptionRate: 2
+  resourceRegenRate: 1
+  timeUntilResourceRegen: 1.5
+  currentTime: 145.33856
+  hopForce: 3
