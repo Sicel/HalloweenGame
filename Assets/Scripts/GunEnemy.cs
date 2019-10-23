@@ -22,19 +22,19 @@ public class GunEnemy : Agent
     new private void Update()
     {
         base.Update();
-        //ShootLoop();
+        ShootLoop();
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 50))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1000, Color.white);
-            Debug.Log("Did not Hit");
-        }
+        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 50))
+        //{
+        //    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * hit.distance, Color.yellow);
+        //    Debug.Log("Did Hit");
+        //}
+        //else
+        //{
+        //    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1000, Color.white);
+        //    Debug.Log("Did not Hit");
+        //}
 
     }
 

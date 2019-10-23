@@ -42,10 +42,19 @@ public class EnemyProjectile : MonoBehaviour
         //{
         //    Destroy(this);
         //}
-        
 
 
 
+
+        if (lifetime > .5f)
+        {
+            Destroy(gameObject);
+        }
+        //Debug.Log("Colliding");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (lifetime > .5f)
         {
             Destroy(gameObject);

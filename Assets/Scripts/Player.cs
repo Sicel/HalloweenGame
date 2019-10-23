@@ -58,6 +58,11 @@ public class Player : Agent
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
 
+        if(health < 1)
+        {
+            Die();
+        }
+
         // Player rushes
         if (magicRush)
         {
@@ -175,6 +180,11 @@ public class Player : Agent
             case "Water":
                 LevelManager.Reset();
                 break;
+            case "EnemyProjectile":
+                health--;
+                Destroy(collision.gameObject);
+                break;
+               
         }
     }
 
@@ -236,5 +246,10 @@ public class Player : Agent
         //rigidB.AddForce(pushVector);
 
         Debug.Log("pushing");
+    }
+
+    protected override void Die()
+    {
+        LevelManager.Reset();
     }
 }
