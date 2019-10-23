@@ -58,7 +58,8 @@ public class Player : Agent
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
 
-        if(health < 1)
+        //checks if player health is less than one, move to agent maybe?
+        if(health < 1) 
         {
             Die();
         }
@@ -183,6 +184,9 @@ public class Player : Agent
             case "EnemyProjectile":
                 health--;
                 Destroy(collision.gameObject);
+                break;
+            case "Enemy":
+                health--;
                 break;
                
         }

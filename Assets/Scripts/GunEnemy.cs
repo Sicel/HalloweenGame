@@ -23,7 +23,7 @@ public class GunEnemy : Agent
     {
         base.Update();
         ShootLoop();
-        RaycastHit hit;
+        //RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 50))
         //{
@@ -55,6 +55,9 @@ public class GunEnemy : Agent
         }
     }
 
+    /// <summary>
+    /// spawns bullet in certian direction
+    /// </summary>
     void Shoot()
     {
         //Debug.Log("Shooting");

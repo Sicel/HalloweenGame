@@ -20,6 +20,7 @@ public class SamEnemy : Agent
     {
         base.Update();
 
+        //shoots if player is nearby, off the ground, and has witch costume equipped
         if (Vector3.Distance(player.transform.position, transform.position) < 50 && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == "Witch")
         {
             ShootLoop();

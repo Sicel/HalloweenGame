@@ -16,14 +16,18 @@ public class Missle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //apply force directly to transform
         Vector3 SteeringForce = Seek();
 
         transform.position += SteeringForce * Time.deltaTime;
         transform.right = -SteeringForce;
 
     }
-
-    Vector3 Seek()
+    /// <summary>
+    /// Missle Lock on behavior
+    /// </summary>
+    /// <returns>returns velocity vector facing player</returns>
+    private Vector3 Seek()
     {
         Vector3 SeekDirection;
 
