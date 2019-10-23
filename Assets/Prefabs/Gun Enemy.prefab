@@ -106,6 +106,7 @@ MonoBehaviour:
   gravity: 1
   moveSpeed: 20
   startPos: {x: 0, y: 0}
+  bullet: {fileID: 6099702251909108849, guid: d4002100f4c112644bd60ef43b98129b, type: 3}
 --- !u!50 &3854308874616493724
 Rigidbody2D:
   serializedVersion: 4

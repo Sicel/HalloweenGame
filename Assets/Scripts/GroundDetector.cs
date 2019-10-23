@@ -21,7 +21,7 @@ public class GroundDetector : MonoBehaviour
                 parent.onGround = true;
                 break;
         }
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -46,10 +46,6 @@ public abstract class Agent : MonoBehaviour
     {
     }
 
-    /// <summary>
-    /// Implemented by each agent, calculates net velocity and direction
-    /// </summary>
-    //public abstract Vector3 CalcSteeringForces();
 
     /// <summary>
     /// Calculates final acceleration on an agent

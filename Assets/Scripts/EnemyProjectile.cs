@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     Agent agent;
     public Vector3 veloticy;
@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,6 +19,16 @@ public class Projectile : MonoBehaviour
         float dT = Time.deltaTime;
         transform.position += veloticy * dT;
         lifetime += dT;
+
+        if (lifetime > .1f)
+        {
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        
+        if(lifetime > 20)
+        {
+            Destroy(this);
+        }
     }
 
     public void Init(Agent agent)
@@ -32,6 +42,9 @@ public class Projectile : MonoBehaviour
         //{
         //    Destroy(this);
         //}
+        
+
+
 
         if (lifetime > .5f)
         {
@@ -40,7 +53,7 @@ public class Projectile : MonoBehaviour
         Debug.Log("Colliding");
     }
 
-    
+
 
 
 }
