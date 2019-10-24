@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public float speed = 5;
 
     Agent agent;
+    [SerializeField]
     Vector3 velocity = Vector3.zero;
     Collider2D collider;
     private float lifetime;
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
         lifetime += Time.deltaTime;
     }
 
-    public void Init(Agent agent, Vector2 direction = Vector2.zero)
+    public void Init(Agent agent, Vector2 direction = new Vector2())
     {
         this.agent = agent;
         velocity = direction * speed;
