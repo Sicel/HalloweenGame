@@ -40,21 +40,13 @@ public abstract class Agent : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    protected void Start()
-    {
-       //maxSpeed = 10;
-        //mass = 5f;
-    }
+    //protected void Start(){}
 
     // Update is called once per frame
     protected virtual void Update()
     {
     }
 
-    /// <summary>
-    /// Implemented by each agent, calculates net velocity and direction
-    /// </summary>
-    //public abstract Vector3 CalcSteeringForces();
 
     /// <summary>
     /// Calculates final acceleration on an agent

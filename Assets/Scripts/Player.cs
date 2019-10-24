@@ -57,6 +57,13 @@ public class Player : Agent
         ChangeCostume();
         currentCostumeScript.Update(); // Moves using currently equipped costume's movement method
 
+        //checks if player health is less than one, move to agent maybe?
+        // The Health property takes care of this
+        //if(health < 1) 
+        //{
+        //    Die();
+        //}
+
         // Player rushes
         if (magicRush)
         {
@@ -174,6 +181,14 @@ public class Player : Agent
             case "Water":
                 LevelManager.Reset();
                 break;
+            case "EnemyProjectile":
+                Health--;
+                Destroy(collision.gameObject);
+                break;
+            case "Enemy":
+                Health--;
+                break;
+               
         }
     }
 
@@ -235,5 +250,10 @@ public class Player : Agent
         //rigidB.AddForce(pushVector);
 
         Debug.Log("pushing");
+    }
+
+    protected override void Die()
+    {
+        LevelManager.Reset();
     }
 }

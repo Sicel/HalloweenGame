@@ -23,7 +23,9 @@ public class LevelManager : MonoBehaviour
             costume.currentResource = costume.maxResource;
         }
     }
-
+    /// <summary>
+    /// Reloads the Scene
+    /// </summary>
     public static void Reset()
     {
         SceneManager.LoadScene("TestScene");

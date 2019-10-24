@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     Agent agent;
     Vector3 velocity = Vector3.zero;
     Collider2D collider;
+    private float lifetime;
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +22,10 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.position += velocity * Time.deltaTime;
+        lifetime += Time.deltaTime;
     }
 
-    public void Init(Agent agent, Vector2 direction)
+    public void Init(Agent agent, Vector2 direction = Vector2.zero)
     {
         this.agent = agent;
         velocity = direction * speed;
@@ -41,5 +43,16 @@ public class Projectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        // I'm not sure if this is needed
+        //if (lifetime > .5f)
+        //{
+        //    Destroy(gameObject);
+        //}
+        Debug.Log("Colliding");
     }
+
+    
+
+
 }
