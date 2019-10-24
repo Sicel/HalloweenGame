@@ -33,8 +33,13 @@ public abstract class BaseCostume : ScriptableObject
 
     public float timeUntilResourceRegen = 1.5f;
 
+    public float attackTime = 1.0f;
+
     [SerializeField]
     float currentTime = 0;
+
+    [SerializeField]
+    protected float currentAttackTime = 0;
 
 
     /// <summary>
@@ -51,6 +56,7 @@ public abstract class BaseCostume : ScriptableObject
     public virtual void Update()
     { 
         Move();
+
         if (prevResource <= currentResource)
         {
             if (currentResource < maxResource && currentTime >= timeUntilResourceRegen)

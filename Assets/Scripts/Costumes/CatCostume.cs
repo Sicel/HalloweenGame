@@ -14,6 +14,25 @@ public class CatCostume : BaseCostume
 
     public float sprintSpeed { get { return baseSpeed * sprintMultiplier; } }
 
+    public override void Update()
+    {
+        base.Update();
+
+        if (player.attackBox.Active)
+        {
+            currentAttackTime += Time.deltaTime;
+        }
+        else
+        {
+            currentAttackTime = 0;
+        }
+
+        if (currentAttackTime >= attackTime)
+        {
+            player.attackBox.DeActivate();
+        }
+    }
+
     protected override void HorizontalMovement()
     {
         base.HorizontalMovement();
@@ -24,5 +43,15 @@ public class CatCostume : BaseCostume
         {
             player.RigidBody.velocity = new Vector2(horizontal * sprintSpeed, player.RigidBody.velocity.y);
         }
+    }
+
+    public override void Attack()
+    {
+        player.attackBox.Activate(player);
+        foreach (Agent enemy in player.attackBox.attackList)
+        {
+            enemy.Health--;
+        }
+        player.attackBox.attackList.Clear();
     }
 }

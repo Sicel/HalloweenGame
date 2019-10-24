@@ -20,6 +20,7 @@ public class PlayerEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("health"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("attackBox"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isAbleToFly"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("costumeColors"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("onGround"));

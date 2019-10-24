@@ -7,6 +7,7 @@ public abstract class Agent : MonoBehaviour
     [Header("Agent")]
     public int health = 3; // Health points
     public bool onGround = false;
+    public AttackBox attackBox;
 
     //movement vectors
     public Vector3 agentPosition; //current position of agent
@@ -80,7 +81,7 @@ public abstract class Agent : MonoBehaviour
 
     protected virtual void Die()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     // When agent comes into contact with another object

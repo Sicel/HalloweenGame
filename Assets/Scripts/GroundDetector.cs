@@ -13,6 +13,21 @@ public class GroundDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Allows witch to fly through platforms
+        if (parent is Player)
+        {
+            if (BaseCostume.player.currentCostumeScript is WitchCostume)
+            {
+                WitchCostume witch = BaseCostume.player.currentCostumeScript as WitchCostume;
+                if (witch.flyMode && Input.GetKey(KeyCode.W))
+                {
+                    feet.enabled = false;
+                    parent.onGround = false;
+                    return;
+                }
+            }
+        }
+
         switch (collision.gameObject.tag)
         {
             case "Ground":
@@ -21,11 +36,25 @@ public class GroundDetector : MonoBehaviour
                 parent.onGround = true;
                 break;
         }
-        Debug.Log(collision.gameObject.tag);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Allows witch to fly through platforms
+        if (parent is Player)
+        {
+            if (BaseCostume.player.currentCostumeScript is WitchCostume)
+            {
+                WitchCostume witch = BaseCostume.player.currentCostumeScript as WitchCostume;
+                if (witch.flyMode && Input.GetKey(KeyCode.W))
+                {
+                    feet.enabled = false;
+                    parent.onGround = false;
+                    return;
+                }
+            }
+        }
+
         switch (collision.gameObject.tag)
         {
             case "Ground":

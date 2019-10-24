@@ -65,6 +65,7 @@ public class WitchCostume : BaseCostume
 
     public override void Attack()
     {
-        base.Attack();
+        GameObject bullet = Instantiate(projectile);
+        bullet.GetComponent<Projectile>().Init(player, new Vector2(1, 0));
     }
 }
