@@ -10,20 +10,25 @@ public class SamEnemy : Agent
     public GameObject bullet;
     GameObject player;
 
+    public float range;
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = BaseCostume.player.gameObject;
+        //player.IsFlying
     }
 
     new private void Update()
     {
+        //do raycast to detect player is clear to shoot
         base.Update();
-
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0,range,0), Color.red);
         //shoots if player is nearby, off the ground, and has witch costume equipped
-        if (Vector3.Distance(player.transform.position, transform.position) < 50 && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch)
+        if (Vector3.Distance(player.transform.position, transform.position) < range && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch && player.transform.position.y > transform.position.y - gameObject.GetComponent<BoxCollider2D>().size.y)
         {
             ShootLoop();
+            
         }
 
     }
