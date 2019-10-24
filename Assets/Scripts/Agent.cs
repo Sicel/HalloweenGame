@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public abstract class Agent : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public abstract class Agent : MonoBehaviour
     public int health = 3; // Health points
     public bool onGround = false;
     public AttackBox attackBox;
+    public TextMeshProUGUI healthDisplay;
 
     //movement vectors
     public Vector3 agentPosition; //current position of agent
@@ -39,12 +41,12 @@ public abstract class Agent : MonoBehaviour
         collisionBox = GetComponent<Collider2D>();
     }
 
-    // Start is called before the first frame update
     //protected void Start(){}
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        healthDisplay.text = Health.ToString();
     }
 
 

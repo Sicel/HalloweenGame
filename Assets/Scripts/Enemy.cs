@@ -19,8 +19,9 @@ public class Enemy : Agent
         startPos = transform.position;
     }
 
-    new private void Update()
+    protected override void Update()
     {
+        base.Update();
         Move();
     }
 

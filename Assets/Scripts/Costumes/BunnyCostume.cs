@@ -20,4 +20,18 @@ public class BunnyCostume : BaseCostume
         //if (player.onGround)
         //player.RigidBody.AddForce(new Vector2(0, hopForce), ForceMode2D.Impulse);
     }
+
+    public override void Move()
+    {
+        base.Move();
+
+        // TODO: Let player hide
+        // if (player.onGround)
+        // {
+        //     if (Input.GetKey(KeyCode.S))
+        //     {
+        // 
+        //     }
+        // }
+    }
 }

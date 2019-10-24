@@ -32,7 +32,7 @@ public class Player : Agent
     Vector3 alteredScale;
     bool altered;
 
-    public string CurrentCostume { get { return currentCostume.ToString(); } } // Current costume as string
+    public Costume CurrentCostume { get { return currentCostume; } } // Current costume as string
     public Rigidbody2D RigidBody { get { return rigidBody; } }
 
     new private void Awake()
