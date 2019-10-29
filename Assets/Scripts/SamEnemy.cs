@@ -22,13 +22,21 @@ public class SamEnemy : Agent
     new private void Update()
     {
         //do raycast to detect player is clear to shoot
+        RaycastHit obs;
+
+
+
         base.Update();
         Debug.DrawLine(transform.position, transform.position + new Vector3(0,range,0), Color.red);
         //shoots if player is nearby, off the ground, and has witch costume equipped
         if (Vector3.Distance(player.transform.position, transform.position) < range && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch && player.transform.position.y > transform.position.y - gameObject.GetComponent<BoxCollider2D>().size.y)
         {
-            ShootLoop();
-            
+            Physics.Raycast(transform.position, player.transform.position, out obs, (int)range);
+
+            if (obs.collider.gameObject.tag == "Player")
+            {
+                ShootLoop();
+            }
         }
 
     }
