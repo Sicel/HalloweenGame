@@ -72,13 +72,17 @@ public abstract class BaseCostume : ScriptableObject
         currentTime += Time.deltaTime;
         prevResource = currentResource;
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Attack();
+            Attack(new Vector2(-1, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Attack(new Vector2(1, 0));
         }
     }
 
-    public virtual void Attack()
+    public virtual void Attack(Vector2 direction)
     {
 
     }

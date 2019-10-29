@@ -35,6 +35,19 @@ public class Player : Agent
     public Costume CurrentCostume { get { return currentCostume; } } // Current costume as string
     public Rigidbody2D RigidBody { get { return rigidBody; } }
 
+    public bool IsFlying
+    {
+        get
+        {
+            if (currentCostume == Costume.Witch)
+            {
+                WitchCostume witch = (WitchCostume)currentCostumeScript;
+                return witch.flyMode;
+            }
+            return false;
+        }
+    }
+
     new private void Awake()
     {
         base.Awake();
@@ -99,11 +112,11 @@ public class Player : Agent
     /// </summary>
     void ChangeCostume()
     {
-        if (Input.GetKeyDown(KeyCode.Comma))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             currentCostume--;
         }
-        if (Input.GetKeyDown(KeyCode.Period))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             currentCostume++;
         }
@@ -239,8 +252,12 @@ public class Player : Agent
     {
 
         rigidBody.velocity = Vector3.zero;
+        Vector3 pushVector = Vector3.zero;
 
-        Vector3 pushVector = transform.position - collidingEnemy.transform.position;
+        if (collidingEnemy)
+        {
+            pushVector = transform.position - collidingEnemy.transform.position;
+        }
 
         pushVector.Normalize();
 

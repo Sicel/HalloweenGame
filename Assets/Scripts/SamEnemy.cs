@@ -21,7 +21,7 @@ public class SamEnemy : Agent
         base.Update();
 
         //shoots if player is nearby, off the ground, and has witch costume equipped
-        if (Vector3.Distance(player.transform.position, transform.position) < 50 && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch)
+        if (Vector3.Distance(player.transform.position, transform.position) < 50 && player.GetComponent<Player>().IsFlying)//player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch)
         {
             ShootLoop();
         }
@@ -47,7 +47,7 @@ public class SamEnemy : Agent
 
     void Shoot()
     {
-        GameObject firedBullet = GameObject.Instantiate(bullet);
+        GameObject firedBullet = Instantiate(bullet);
         firedBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
     }
 }
