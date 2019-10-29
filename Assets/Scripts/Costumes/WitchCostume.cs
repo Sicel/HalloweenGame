@@ -63,9 +63,10 @@ public class WitchCostume : BaseCostume
         currentResource -= resourceConsumptionRate * Time.deltaTime;
     }
 
-    public override void Attack()
+    public override void Attack(Vector2 direction)
     {
         GameObject bullet = Instantiate(projectile);
-        bullet.GetComponent<Projectile>().Init(player, new Vector2(1, 0));
+
+        bullet.GetComponent<Projectile>().Init(player, direction);
     }
 }

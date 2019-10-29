@@ -16,7 +16,7 @@ public class SamEnemy : Agent
     void Start()
     {
         player = BaseCostume.player.gameObject;
-        //player.IsFlying
+        //
     }
 
     new private void Update()
@@ -29,7 +29,7 @@ public class SamEnemy : Agent
         base.Update();
         Debug.DrawLine(transform.position, transform.position + new Vector3(0,range,0), Color.red);
         //shoots if player is nearby, off the ground, and has witch costume equipped
-        if (Vector3.Distance(player.transform.position, transform.position) < range && player.GetComponent<Player>().onGround == false && player.GetComponent<Player>().CurrentCostume == Costume.Witch && player.transform.position.y > transform.position.y - gameObject.GetComponent<BoxCollider2D>().size.y)
+        if (Vector3.Distance(player.transform.position, transform.position) < range && player.IsFlying)
         {
             Physics.Raycast(transform.position, player.transform.position, out obs, (int)range);
 
@@ -60,7 +60,7 @@ public class SamEnemy : Agent
 
     void Shoot()
     {
-        GameObject firedBullet = GameObject.Instantiate(bullet);
+        GameObject firedBullet = Instantiate(bullet);
         firedBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
     }
 }

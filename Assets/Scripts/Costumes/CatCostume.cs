@@ -45,7 +45,7 @@ public class CatCostume : BaseCostume
         }
     }
 
-    public override void Attack()
+    public override void Attack(Vector2 direction)
     {
         player.attackBox.Activate(player);
         foreach (Agent enemy in player.attackBox.attackList)
