@@ -59,7 +59,6 @@ public class EnemyProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Debug.Log("Colliding");
     }
 
 
