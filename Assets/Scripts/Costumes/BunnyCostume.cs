@@ -28,9 +28,10 @@ public class BunnyCostume : BaseCostume
         // TODO: Let player hide
         // if (player.onGround)
         // {
-        //     if (Input.GetKey(KeyCode.S))
+        //     if (Input.GetKeyDown(KeyCode.S))
         //     {
-        // 
+        //         player.RigidBody.position.y -= player.RigidBody.
+        //         player.RigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
         //     }
         // }
     }
