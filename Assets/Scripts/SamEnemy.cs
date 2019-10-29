@@ -8,15 +8,14 @@ public class SamEnemy : Agent
     private float shootInterval = 1;
     private float sTimer = 0;
     public GameObject bullet;
-    GameObject player;
+    Player player;
 
     public float range;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = BaseCostume.player.gameObject;
-        //
+        player = BaseCostume.player;
     }
 
     new private void Update()
