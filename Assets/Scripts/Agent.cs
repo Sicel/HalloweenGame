@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public abstract class Agent : MonoBehaviour
 {
     [Header("Agent")]
-
     public int health = 3; // Health points
     public bool onGround = false;
-    public bool isFalling = false;
-    protected Vector3 prevLocation;
+    public AttackBox attackBox;
+    public TextMeshProUGUI healthDisplay;
 
     //movement vectors
     public Vector3 agentPosition; //current position of agent
@@ -23,7 +23,17 @@ public abstract class Agent : MonoBehaviour
 
     protected Rigidbody2D rigidBody;
     protected Collider2D collisionBox;
-    public float rayDistance = 0.5f;
+
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+            if (health <= 0)
+                Die();
+        }
+    }
 
     protected void Awake()
     {
@@ -31,56 +41,14 @@ public abstract class Agent : MonoBehaviour
         collisionBox = GetComponent<Collider2D>();
     }
 
-    // Start is called before the first frame update
-    protected void Start()
-    {
-       //maxSpeed = 10;
-        //mass = 5f;
-    }
+    //protected void Start(){}
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
-        DetectGround();
-        prevLocation = transform.position;
+        healthDisplay.text = Health.ToString();
     }
 
-    // Trying to detect the ground using raycast
-    void DetectGround()
-    {
-        float bottomEdge = transform.position.y - collisionBox.bounds.extents.y;
-        float leftEdge = transform.position.x - collisionBox.bounds.extents.x;
-        float rightEdge = transform.position.x + collisionBox.bounds.extents.x;
-
-        Ray2D leftRay = new Ray2D(new Vector2(leftEdge, bottomEdge), new Vector2(-transform.position.x, bottomEdge - 0.5f));
-        Ray2D rightRay = new Ray2D(new Vector2(rightEdge, bottomEdge), new Vector2(transform.position.x, bottomEdge - 0.5f));
-
-        //RaycastHit2D thingHit = Physics2D.Raycast(new Vector2(transform.position.x, bottomEdge), Vector2.down);
-        //switch (thingHit.collider.gameObject.tag)
-        //{
-        //    case "Ground":
-        //        onGround = true;
-        //}
-    }
-
-    // Draws the raycast
-    private void OnDrawGizmos()
-    {
-        //float bottomEdge = transform.position.y - collisionBox.bounds.extents.y;
-        //float leftEdge = transform.position.x - collisionBox.bounds.extents.x;
-        //float rightEdge = transform.position.x + collisionBox.bounds.extents.x;
-        //
-        //Ray2D leftRay = new Ray2D(new Vector2(leftEdge, bottomEdge), new Vector2(1, -1));
-        //Ray2D rightRay = new Ray2D(new Vector2(rightEdge, bottomEdge), new Vector2(-1, -1));
-        //
-        //Gizmos.DrawRay(leftRay.origin, leftRay.direction);
-        //Gizmos.DrawRay(rightRay.origin, rightRay.direction);
-    }
-
-    /// <summary>
-    /// Implemented by each agent, calculates net velocity and direction
-    /// </summary>
-    //public abstract Vector3 CalcSteeringForces();
 
     /// <summary>
     /// Calculates final acceleration on an agent
@@ -105,7 +73,12 @@ public abstract class Agent : MonoBehaviour
         return frictionForce;
     }
 
-    // When player comes into contact with another object
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    // When agent comes into contact with another object
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         switch (collision.gameObject.tag)

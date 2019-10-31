@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Costume Manager
   m_EditorClassIdentifier: 
   costumeScripts:
-  - {fileID: 11400000, guid: dc59f3d410688f749bdaca1849a73d6c, type: 2}
+  - {fileID: 11400000, guid: 750ed1b1c118c0e4a9d55362319db94a, type: 2}
   - {fileID: 11400000, guid: 5c43254b738ffcb41914da11a605799e, type: 2}
   - {fileID: 11400000, guid: df0e5b0930d42ea498a10eb6daf95730, type: 2}

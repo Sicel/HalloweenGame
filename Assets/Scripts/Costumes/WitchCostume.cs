@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Costume Tyoe: Witch
 /// </summary>
-[CreateAssetMenu(menuName = "Costume Stats/Witch Stats")]
+[CreateAssetMenu(menuName = "Costumes/Witch")]
 public class WitchCostume : BaseCostume
 {
     [Header("Witch Costume")]
@@ -20,9 +20,9 @@ public class WitchCostume : BaseCostume
     {
         base.Move();
 
-        if (currentMana <= 0)
+        if (currentResource <= 0)
         {
-            currentMana = 0;
+            currentResource = 0;
             isAbleToFly = false;
         }
         else
@@ -59,7 +59,14 @@ public class WitchCostume : BaseCostume
         float vertical = Input.GetAxis("Vertical");
 
         player.RigidBody.velocity = new Vector2(horizontal * baseSpeed, vertical * baseSpeed);
-        Debug.Log(vertical * baseSpeed);
-        currentMana -= manaConsumptionRate * Time.deltaTime;
+
+        currentResource -= resourceConsumptionRate * Time.deltaTime;
+    }
+
+    public override void Attack(Vector2 direction)
+    {
+        GameObject bullet = Instantiate(projectile);
+
+        bullet.GetComponent<Projectile>().Init(player, direction);
     }
 }

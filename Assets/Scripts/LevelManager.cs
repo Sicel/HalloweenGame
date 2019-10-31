@@ -20,16 +20,12 @@ public class LevelManager : MonoBehaviour
     {
         foreach (BaseCostume costume in costumeManager.costumeScripts)
         {
-            costume.currentMana = costume.maxMana;
+            costume.currentResource = costume.maxResource;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// Reloads the Scene
+    /// </summary>
     public static void Reset()
     {
         SceneManager.LoadScene("TestScene");
